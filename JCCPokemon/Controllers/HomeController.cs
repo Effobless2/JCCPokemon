@@ -5,13 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JCCPokemon.Models;
+using JCCP.AuthentificationConnector;
 
 namespace JCCPokemon.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+
+        private readonly IAuthentificationService _service;
+
+        public HomeController(IAuthentificationService service)
         {
+            _service = service;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string test = await  _service.GetTest();
             return View();
         }
 

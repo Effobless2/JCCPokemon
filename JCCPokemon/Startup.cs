@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JCCP.AuthentificationConnector;
+using JCCP.SqlConnector;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +26,9 @@ namespace JCCPokemon
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<SqlServiceOptions>(Configuration.GetSection("SqlConfiguration"));
+            services.AddTransient<ISqlService, SqlService>();
+            services.AddTransient<IAuthentificationService, AuthentificationService>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
