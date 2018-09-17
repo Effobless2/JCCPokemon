@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "wwwroot/js/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -27,5 +24,9 @@
     "react-dom": "^16.4.1",
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2"
+  },
+  "scripts": {
+    "webpack": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
