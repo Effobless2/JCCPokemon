@@ -1,0 +1,10 @@
+CREATE TABLE PokemonCard(
+	CardId UNIQUEIDENTIFIER PRIMARY KEY,
+	EntityId UNIQUEIDENTIFIER,
+	RarityId UNIQUEIDENTIFIER,
+	TypeId UNIQUEIDENTIFIER,
+	ImageUrl nvarchar(max),
+	FOREIGN KEY (EntityId) REFERENCES Entity(EntityId),
+	FOREIGN KEY (RarityId) REFERENCES Rarity(RarityId),
+	FOREIGN KEY (TypeId) REFERENCES EnergyType(TypeId)
+)
