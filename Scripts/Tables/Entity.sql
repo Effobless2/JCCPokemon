@@ -1,5 +1,5 @@
 CREATE TABLE Entity(
-	EntityId UNIQUEIDENTIFIER PRIMARY KEY,
+	EntityId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT newsequentialid(),
 	FrenchName nvarchar(max),
 	EnglishName nvarchar(max),
 	PokedexNumber int,
