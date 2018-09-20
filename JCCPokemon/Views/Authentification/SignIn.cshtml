@@ -9,10 +9,10 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <!-- Start form -->
             <h2>SignIn !</h2><br />
-            <form>
+            <form asp-action="Connection">
                 <div class="form-group">
                     <label for="login">UserName</label>
-                    <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter your username">
+                    <input type="text" class="form-control" name="login" id="login" aria-describedby="emailHelp" placeholder="Enter your username">
                 </div>
                 <div class="form-group">
                     <label for="LogInPassword">Password</label>
@@ -31,7 +31,7 @@
             <form>
                 <div class="form-group">
                     <label for="SignUpLogin">UserName</label>
-                    <input type="text" class="form-control" id="SignUpLogin" aria-describedby="emailHelp" placeholder="Enter a username">
+                    <input type="text" class="form-control" id="SignUpLogin" name="login" aria-describedby="emailHelp" placeholder="Enter a username">
                 </div>
                 <div class="form-group">
                     <label for="SignUpPassword">Password</label>
