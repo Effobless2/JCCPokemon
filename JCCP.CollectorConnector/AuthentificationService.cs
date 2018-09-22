@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JCCP.BO;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -7,8 +8,7 @@ namespace JCCP.AuthentificationConnector
 {
     public interface IAuthentificationService
     {
-        Task<string> GetTest();
-        Task<string> UserAuthentification(string login, string password);
+        Task<Collector> UserAuthentification(string login, string password);
     }
 
 
@@ -44,9 +44,9 @@ namespace JCCP.AuthentificationConnector
             }
         }
 
-        public async Task<string> UserAuthentification(string login, string password)
+        public async Task<Collector> UserAuthentification(string login, string password)
         {
-            string res = "";
+            Collector res = null;
             using (SqlConnection conn = await _sqlService.GetConnection())
             {
                 using (SqlCommand cmd = new SqlCommand("Authentification", conn))
@@ -60,13 +60,20 @@ namespace JCCP.AuthentificationConnector
                         {
                             if (_sqlService.HasColumn(reader, "LoginCollector"))
                             {
-                                res = (string)reader["LoginCollector"];
+                                res = new Collector();
+                                FillCollector(res, reader);
                             }
                         }
                     }
                 }
             }
             return res;
+        }
+
+        public void FillCollector(Collector res, SqlDataReader reader)
+        {
+            res.Username = (string)reader["LoginCollector"];
+            res.CollectorId = (Guid)reader["IdCollector"];
         }
     }
 }

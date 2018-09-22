@@ -35,8 +35,16 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="#" asp-action="#"><span class="glyphicon glyphicon-user"></span>@User.Identity.Name</a></li>
+                        <li><a asp-controller="#" asp-action="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+                    }
+                    else
+                    {
                     <li><a asp-controller="Authentification" asp-action="SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a asp-controller="Authentification" asp-action="SignIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    }
                 </ul>
 
             </div>

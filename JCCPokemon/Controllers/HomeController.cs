@@ -21,7 +21,6 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string test = await  _service.UserAuthentification("test","test");
             return View();
         }
 

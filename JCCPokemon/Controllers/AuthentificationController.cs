@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using JCCP.AuthentificationConnector;
+using JCCP.BO;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JCCPokemon.Controllers
@@ -30,9 +34,25 @@ namespace JCCPokemon.Controllers
             return View();
         }
         [HttpPost]
-        public async Task Connection(string login, string password)
+        public async Task<IActionResult> Connection(string login, string password)
         {
-            string res = await _authentificationService.UserAuthentification(login, password);
+            Collector res = await _authentificationService.UserAuthentification(login, password);
+            if (res == null)
+            {
+                return View();
+            }
+
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, login),
+                new Claim(ClaimTypes.Authentication, res.CollectorId.ToString())
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            return Redirect("/");
+
         }
     }
 }

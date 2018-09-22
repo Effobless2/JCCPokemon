@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JCCP.BO\JCCP.BO.csproj" />
     <ProjectReference Include="..\JCCP.SqlConnector\JCCP.SqlConnector.csproj" />
   </ItemGroup>
 
