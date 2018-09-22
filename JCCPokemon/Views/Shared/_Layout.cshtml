@@ -38,7 +38,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-controller="#" asp-action="#"><span class="glyphicon glyphicon-user"></span>@User.Identity.Name</a></li>
-                        <li><a asp-controller="#" asp-action="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+                        <li><a asp-controller="Authentification" asp-action="Logout"><span class="glyphicon glyphicon-log-in"></span>GoodBye !</a></li>
                     }
                     else
                     {

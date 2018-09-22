@@ -7,6 +7,7 @@ using JCCP.AuthentificationConnector;
 using JCCP.BO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JCCPokemon.Controllers
@@ -53,6 +54,16 @@ namespace JCCPokemon.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
             return Redirect("/");
 
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
+
+            return Redirect("/");
         }
     }
 }
