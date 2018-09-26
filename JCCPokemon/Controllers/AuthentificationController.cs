@@ -55,7 +55,7 @@ namespace JCCPokemon.Controllers
             return Redirect("/");
 
         }
-
+        
         public async Task<IActionResult> Logout()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -64,6 +64,33 @@ namespace JCCPokemon.Controllers
             }
 
             return Redirect("/");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewAccount(string login, string password)
+        {
+            List<Collector> lc = await _authentificationService.GetAllCollectorByLogin(login);
+            if (lc.Count == 0)
+            {
+                Collector c = await _authentificationService.CreateNewCollector(login, password);
+
+
+                List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, login),
+                new Claim(ClaimTypes.Authentication, c.CollectorId.ToString())
+            };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+                return Redirect("/");
+            }
+
+            return RedirectToAction("SignUp");
+            
+
         }
     }
 }

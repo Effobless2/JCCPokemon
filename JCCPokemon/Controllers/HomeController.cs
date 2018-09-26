@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JCCPokemon.Models;
 using JCCP.AuthentificationConnector;
+using JCCP.BO;
 
 namespace JCCPokemon.Controllers
 {
     public class HomeController : Controller
     {
 
-        private readonly IAuthentificationService _service;
+        private readonly IAuthentificationService _authentificationService;
 
         public HomeController(IAuthentificationService service)
         {
-            _service = service;
+            _authentificationService = service;
         }
 
         public async Task<IActionResult> Index()
