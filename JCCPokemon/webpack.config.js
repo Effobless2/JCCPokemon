@@ -1,9 +1,12 @@
 module.exports = {
     context: __dirname + "/wwwroot/js/react",
-    entry: "./index.tsx",
+    entry: {
+        Client :  "./Client/index.tsx",
+        Admin  :  "./Admin/index.tsx"
+    },
     output: {
-        path: __dirname + "/wwwroot/js/react/dist",
-        filename: "bundle.js"
+        path: __dirname + "/wwwroot/js/dist/",
+        filename: "[name]/bundle.js"
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"]
