@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using JCCP.AuthentificationConnector;
 using JCCP.BO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JCCPokemon.Controllers
@@ -40,7 +37,7 @@ namespace JCCPokemon.Controllers
             Collector res = await _authentificationService.UserAuthentification(login, password);
             if (res == null)
             {
-                return View();
+                return RedirectToAction("SignIn");
             }
 
             List<Claim> claims = new List<Claim>()
