@@ -7,13 +7,16 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	Creating a New Bloc inside of the Database
 -- =============================================
-CREATE PROCEDURE CreateNewBloc
+ALTER PROCEDURE CreateNewBloc
 	-- Add the parameters for the stored procedure here
 	@EnglishName nvarchar(max),
 	@FrenchName nvarchar(max), 
-	@ImageUrl nvarchar(max)
+	@ImageUrl nvarchar(max),
+	@CreationYear date
+
 AS
 BEGIN
-	INSERT INTO Bloc(EnglishName, FrenchName, ImageUrl) VALUES (@EnglishName, @FrenchName, @ImageUrl)
+	INSERT INTO Bloc(EnglishName, FrenchName, ImageUrl, CreationYear) VALUES (@EnglishName, @FrenchName, @ImageUrl, @CreationYear)
 END
 GO
+
