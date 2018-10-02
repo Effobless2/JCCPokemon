@@ -11,7 +11,7 @@ namespace JCCPokemon.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.User.Identity.IsAuthenticated && HttpContext.User.Identity.Name != "Admin")
+            if (HttpContext.User.Identity.Name != "Admin")
             {
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 return RedirectToAction("Authentification");
