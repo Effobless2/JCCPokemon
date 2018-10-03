@@ -9,11 +9,20 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
         }
     }
 
+    sendRequest = () => {
+        let frenchName = (document.getElementById("frenchName") as any).value;
+        let englishName = (document.getElementById("englishName") as any).value;
+        let year = parseInt((document.getElementById("yearSelector") as any).value,10);
+
+        console.log(frenchName, englishName, year);
+        //Envoi au serveur
+    }
+
     renderSelectOptions = () => {
         let begin = 1995
         let end = new Date().getFullYear();
         let res = [];
-        for(let i = begin; i<end+1; i++){
+        for(let i = end; i>begin-1; i--){
             res.push(i);
         }
         return res.map((i) => {
@@ -31,14 +40,14 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
                                 <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                                     <h2 label-for="frenchName" className="col-lg-6 col-xs-6">Nom français : </h2>
                                     <div className="col-lg-6 col-xs-6">
-                                        <input type="text" name="frenchName" className="form-control" placeholder="Insérez le nom du Bloc"/>
+                                        <input type="text" name="frenchName" id="frenchName" className="form-control" placeholder="Insérez le nom du Bloc"/>
                                     </div>
                                 </div>
-                            
+                             
                                 <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                                     <h2 label-for="englishName" className="col-lg-6 col-xs-6">Nom anglais : </h2>
                                     <div className="col-lg-6 col-xs-6">
-                                    <input type="text" name="englishName" className="form-control" width="50%" placeholder="Insérez le nom Anglais du Bloc"/>
+                                    <input type="text" name="englishName" id="englishName" className="form-control" width="50%" placeholder="Insérez le nom Anglais du Bloc"/>
                                     </div>
                                     
                                 </div>
@@ -47,14 +56,14 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
                                 <div className="row"  style={{display: "flex", alignItems: "center"}}>
                                     <h2 label-for="yearSelector" className="col-lg-6 col-xs-6">Année de création :</h2>
                                     <div className="col-lg-6 col-xs-6">
-                                        <select className="form-control" name="yearSelector">
+                                        <select className="form-control" id="yearSelector" name="yearSelector">
                                             {this.renderSelectOptions()}
                                         </select>
                                     </div>
                                 </div>
 
                                 <div className="row" style={{display:"flex", justifyContent:"flex-end"}}>
-                                    <button className="btn btn-primary" type="button">Créer le bloc</button>
+                                    <button className="btn btn-primary" type="button" onClick={this.sendRequest}>Créer le bloc</button>
                                 </div>
                             </div>
                             
