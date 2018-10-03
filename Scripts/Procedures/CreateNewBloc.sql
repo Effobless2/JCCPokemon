@@ -11,12 +11,11 @@ ALTER PROCEDURE CreateNewBloc
 	-- Add the parameters for the stored procedure here
 	@EnglishName nvarchar(max),
 	@FrenchName nvarchar(max), 
-	@ImageUrl nvarchar(max),
 	@CreationYear date
 
 AS
 BEGIN
-	INSERT INTO Bloc(EnglishName, FrenchName, ImageUrl, CreationYear) VALUES (@EnglishName, @FrenchName, @ImageUrl, @CreationYear)
+	INSERT INTO Bloc(EnglishName, FrenchName, CreationYear) VALUES (@EnglishName, @FrenchName, @CreationYear)
 END
 GO
 
