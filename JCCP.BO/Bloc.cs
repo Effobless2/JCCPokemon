@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JCCP.BO
 {
-    class Bloc
+    public class Bloc
     {
         public Guid BlocId;
         public string FrenchName;

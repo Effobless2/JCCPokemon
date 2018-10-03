@@ -1,4 +1,5 @@
-﻿using JCCP.SqlConnector;
+﻿using JCCP.BO;
+using JCCP.SqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,7 +9,7 @@ namespace BlocConnector
 {
     public interface IBlocService
     {
-        Task<string> GetAllBlocs();
+        Task<List<Bloc>> GetAllBlocs();
     }
 
     public class BlocService : IBlocService
@@ -21,9 +22,9 @@ namespace BlocConnector
         }
 
 
-        public async Task<string> GetAllBlocs()
+        public async Task<List<Bloc>> GetAllBlocs()
         {
-            string res = "";
+            List<Bloc> res = new List<Bloc>();
 
             using(SqlConnection conn = await _sqlService.GetConnection())
             {
@@ -36,13 +37,24 @@ namespace BlocConnector
                         {
                             if (_sqlService.HasColumn(reader, "FrenchName"))
                             {
-                                res += reader["FrenchName"];
+                                Bloc b = new Bloc();
+                                Fill(reader, b);
+                                res.Add(b);
                             }
                         }
                     }
                 }
             }
             return res;
+        }
+
+        public void Fill(SqlDataReader reader, Bloc bloc)
+        {
+            bloc.BlocId = (Guid)reader["BlocId"];
+            bloc.EnglishName = _sqlService.HasColumn(reader, "EnglishName") ? (string)reader["EnglishName"] : null;
+            bloc.FrenchName = _sqlService.HasColumn(reader, "FrenchName") ? (string)reader["FrenchName"] : null;
+            bloc.Year = _sqlService.HasColumn(reader, "CreationYear") ? (int)reader["CreationYear"] : 0;
+
         }
     }
 }

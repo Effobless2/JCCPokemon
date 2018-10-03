@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using JCCPokemon.Models;
 using JCCP.AuthentificationConnector;
 using BlocConnector;
+using JCCP.BO;
 
 namespace JCCPokemon.Controllers
 {
@@ -25,7 +26,7 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string test = await  _blocService.GetAllBlocs();
+            List<Bloc> test = await  _blocService.GetAllBlocs();
             return View();
         }
 
