@@ -2,6 +2,7 @@
 using JCCP.SqlConnector;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace BlocConnector
     public interface IBlocService
     {
         Task<List<Bloc>> GetAllBlocs();
+        Task<bool> CreateNewBloc(Bloc newBloc);
     }
 
     public class BlocService : IBlocService
@@ -55,6 +57,23 @@ namespace BlocConnector
             bloc.FrenchName = _sqlService.HasColumn(reader, "FrenchName") ? (string)reader["FrenchName"] : null;
             bloc.Year = _sqlService.HasColumn(reader, "CreationYear") ? (int)reader["CreationYear"] : 0;
 
+        }
+
+        public async Task<bool> CreateNewBloc(Bloc newBloc)
+        {
+            using(SqlConnection conn = await _sqlService.GetConnection())
+            {
+                using(var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "CreateNewBloc";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EnglishName", newBloc.EnglishName);
+                    cmd.Parameters.AddWithValue("@FrenchName", newBloc.FrenchName);
+                    cmd.Parameters.AddWithValue("@CreationYear", newBloc.Year);
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+            return true;
         }
     }
 }

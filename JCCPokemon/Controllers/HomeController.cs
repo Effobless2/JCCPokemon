@@ -26,7 +26,7 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<Bloc> test = await  _blocService.GetAllBlocs();
+            bool test = await  _blocService.CreateNewBloc(new Bloc() {FrenchName="MonNom", EnglishName="MyName", Year=1995 });
             return View();
         }
 
