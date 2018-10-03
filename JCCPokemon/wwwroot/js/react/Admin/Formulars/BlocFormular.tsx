@@ -9,18 +9,6 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
         }
     }
 
-    onLoadImage = () => {
-        let fileUploader = document.getElementById("fileUploader") as any;
-        let file = fileUploader.files[0];
-        //this.setState({myImage : URL.createObjectURL(file)})
-        let reader = new FileReader();
-        reader.onload = (e) =>{
-            this.setState({myImage:e.target.result});
-        };
-        reader.readAsDataURL(file);
-        console.log(this.state.myImage);
-    }
-
     renderSelectOptions = () => {
         let begin = 1995
         let end = new Date().getFullYear();
@@ -34,39 +22,41 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
     }
 
     render(){
-        
         return (
             <div>
                 <h1>Création d'un Bloc</h1>
-                <div>
-                    <form>
-                        <div>
-                            <h1 label-for="frenchName">Nom français : </h1>
-                            <input type="text" name="frenchName" className="form-control" placeholder="Insérez le nom du Bloc"/>
-                        </div>
-                        
-                        <div>
-                            <h1 label-for="englishName">Nom anglais : </h1>
-                            <input type="text" name="englishName" className="form-control" placeholder="Insérez le nom Anglais du Bloc"/>
-                        </div>
-                        
-                        <div>
-                            <h1 label-for="yearSelector">Année de création</h1>
-                            <select name="yearSelector">
-                                {this.renderSelectOptions()}
-                            </select>
-                        </div>
-                        
-
-                        <div>
-                            <img src={this.state.myImage} height="300pt" width="200pt"/>
-                            <input type="file" id="fileUploader" accept="image/*" onChange={this.onLoadImage}/>
-                        
+                    <form className="row" style={{display:"flex", alignItems:"flex-end"}}>
+                        <div className="row">
+                            <div className="col-lg-7 col-xs-12">
+                                <div className="row" style={{display: "flex", alignItems: "baseline"}}>
+                                    <h2 label-for="frenchName" className="col-lg-6 col-xs-6">Nom français : </h2>
+                                    <div className="col-lg-6 col-xs-6">
+                                        <input type="text" name="frenchName" className="form-control" placeholder="Insérez le nom du Bloc"/>
+                                    </div>
+                                </div>
+                            
+                                <div className="row" style={{display: "flex", alignItems: "baseline"}}>
+                                    <h2 label-for="englishName" className="col-lg-6 col-xs-6">Nom anglais : </h2>
+                                    <div className="col-lg-6 col-xs-6">
+                                    <input type="text" name="englishName" className="form-control" width="50%" placeholder="Insérez le nom Anglais du Bloc"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div className="col-lg-5 col-xs-12">
+                                <div className="row"  style={{display: "flex", alignItems: "baseline"}}>
+                                    <h2 label-for="yearSelector" className="col-lg-6 col-xs-6">Année de création :</h2>
+                                    <div className="col-lg-6 col-xs-6">
+                                        <select className="form-control" name="yearSelector">
+                                            {this.renderSelectOptions()}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         <input className="btn btn-primary" type="submit"/>
                     </form>
-                </div>
             </div>
         )
     }
