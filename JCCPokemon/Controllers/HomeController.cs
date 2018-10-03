@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JCCPokemon.Models;
 using JCCP.AuthentificationConnector;
+using BlocConnector;
 
 namespace JCCPokemon.Controllers
 {
     public class HomeController : Controller
     {
 
-        private readonly IAuthentificationService _service;
+        private readonly IAuthentificationService _authentificationService;
+        private readonly IBlocService _blocService;
 
-        public HomeController(IAuthentificationService service)
+        public HomeController(IAuthentificationService service,
+                              IBlocService blocService)
         {
-            _service = service;
+            _authentificationService = service;
+            _blocService = blocService;
         }
 
         public async Task<IActionResult> Index()
         {
-            string test = await  _service.GetTest();
+            string test = await  _blocService.GetAllBlocs();
             return View();
         }
 
