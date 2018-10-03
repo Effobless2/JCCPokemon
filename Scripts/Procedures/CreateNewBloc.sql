@@ -11,7 +11,7 @@ ALTER PROCEDURE CreateNewBloc
 	-- Add the parameters for the stored procedure here
 	@EnglishName nvarchar(max),
 	@FrenchName nvarchar(max), 
-	@CreationYear date
+	@CreationYear int
 
 AS
 BEGIN
