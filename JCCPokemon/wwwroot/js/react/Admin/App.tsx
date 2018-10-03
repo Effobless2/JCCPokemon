@@ -18,7 +18,7 @@ export default class App extends React.Component<{},{content:any}>{
             <button type="button" className="close" onClick={this.CloseForm} data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <div className = "row" style={{display:"flex", alignItems:"flex-end"}}>
+            <div className = "row" style={{display:"flex", alignItems:"flex-end", flexWrap:"wrap"}}>
                 <div className="col-lg-10">
                     <BlocFormular/>
                 </div>

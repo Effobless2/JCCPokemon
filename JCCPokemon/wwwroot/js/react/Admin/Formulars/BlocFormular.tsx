@@ -25,7 +25,7 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
         return (
             <div>
                 <h1>Création d'un Bloc</h1>
-                    <form className="row" style={{display:"flex", alignItems:"flex-end"}}>
+                    <div className="row" style={{display:"flex", alignItems:"flex-end", flexWrap:"wrap"}}>
                         <div className="row">
                             <div className="col-lg-7 col-xs-12">
                                 <div className="row" style={{display: "flex", alignItems: "baseline"}}>
@@ -44,7 +44,7 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
                                 </div>
                             </div>
                             <div className="col-lg-5 col-xs-12">
-                                <div className="row"  style={{display: "flex", alignItems: "baseline"}}>
+                                <div className="row"  style={{display: "flex", alignItems: "center"}}>
                                     <h2 label-for="yearSelector" className="col-lg-6 col-xs-6">Année de création :</h2>
                                     <div className="col-lg-6 col-xs-6">
                                         <select className="form-control" name="yearSelector">
@@ -52,11 +52,15 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
                                         </select>
                                     </div>
                                 </div>
+
+                                <div className="row" style={{display:"flex", justifyContent:"flex-end"}}>
+                                    <button className="btn btn-primary" type="button">Créer le bloc</button>
+                                </div>
                             </div>
+                            
                         </div>
                         
-                        <input className="btn btn-primary" type="submit"/>
-                    </form>
+                    </div>
             </div>
         )
     }
