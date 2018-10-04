@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { BlocService } from '../../ApiWebService/BlocService';
+import Bloc from '../../Model/Bloc';
 
 
 export default class BlocFormular extends React.Component<{},{myImage:any}>{
@@ -13,8 +15,11 @@ export default class BlocFormular extends React.Component<{},{myImage:any}>{
         let frenchName = (document.getElementById("frenchName") as any).value;
         let englishName = (document.getElementById("englishName") as any).value;
         let year = parseInt((document.getElementById("yearSelector") as any).value,10);
-
-        console.log(frenchName, englishName, year);
+        let b = new Bloc();
+        b.frenchName = frenchName;
+        b.englishName = englishName;
+        b.year = year;
+        BlocService.CreateNewBloc(b);
         //Envoi au serveur
     }
 

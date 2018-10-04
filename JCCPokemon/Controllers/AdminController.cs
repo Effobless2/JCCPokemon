@@ -50,14 +50,14 @@ namespace JCCPokemon.Controllers
             }
             return RedirectToAction("Authentification");
         }
-
+        
         [HttpPost]
-        public async Task<IActionResult> CreateNewBloc(string frenchName, string englishName, int year)
+        public async Task<ActionResult> CreateNewBloc([FromBody]Bloc newBloc)
         {
-            if (frenchName != null && englishName != null && year > 1994 && year < DateTime.Now.Year+1)
+
+            if (newBloc.FrenchName != null && newBloc.EnglishName != null && newBloc.Year > 1994 && newBloc.Year < DateTime.Now.Year+1)
             {
-                Bloc b = new Bloc() { FrenchName = frenchName, EnglishName = englishName, Year = year };
-                await _blocService.CreateNewBloc(b);
+                await _blocService.CreateNewBloc(newBloc);
                 return Ok();
             }
             return NotFound();
