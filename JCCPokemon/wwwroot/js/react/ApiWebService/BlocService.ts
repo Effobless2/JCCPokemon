@@ -11,6 +11,7 @@ export class BlocService{
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             }
-        })
+        }).catch((result) => {return result;})
+        return res.status;
     }
 }
