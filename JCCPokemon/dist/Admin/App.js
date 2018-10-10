@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const BlocFormular_1 = require("./Formulars/BlocFormular");
+const SetFormular_1 = require("./Formulars/SetFormular");
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ class App extends React.Component {
                         React.createElement("span", { "aria-hidden": "true" }, "\u00D7")),
                     React.createElement("div", { className: "row", style: { display: "flex", alignItems: "flex-end", flexWrap: "wrap" } },
                         React.createElement("div", { className: "col-lg-10" },
-                            React.createElement("h1", null, "Extension")),
+                            React.createElement(SetFormular_1.default, null)),
                         React.createElement("button", { type: "button", className: "btn btn-danger", onClick: this.CloseForm }, "Annuler"))) });
         };
         this.state = {
@@ -32,7 +33,7 @@ class App extends React.Component {
     }
     render() {
         return (React.createElement("div", null,
-            React.createElement("button", { className: "btn btn-primary", onClick: this.AddBloc }, "Add Bloc"),
+            React.createElement("button", { className: "btn btn-primary", style: { "margin": "5px" }, onClick: this.AddBloc }, "Add Bloc"),
             React.createElement("button", { className: "btn btn-primary", onClick: this.AddSet }, "Add Set"),
             React.createElement("div", null, this.state.content)));
     }

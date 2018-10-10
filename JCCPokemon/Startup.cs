@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BlocConnector;
+﻿using JCCP.BlocConnector;
 using JCCP.AuthentificationConnector;
-using JCCP.BlocConnector;
 using JCCP.ExtensionConnector;
 using JCCP.SqlConnector;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -14,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
 
 namespace JCCPokemon
 {
