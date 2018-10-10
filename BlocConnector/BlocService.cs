@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace BlocConnector
+namespace JCCP.BlocConnector
 {
     public interface IBlocService
     {

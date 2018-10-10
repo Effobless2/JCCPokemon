@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JCCPokemon.Models;
 using JCCP.AuthentificationConnector;
-using BlocConnector;
+using JCCP.BlocConnector;
 using JCCP.BO;
 
 namespace JCCPokemon.Controllers
