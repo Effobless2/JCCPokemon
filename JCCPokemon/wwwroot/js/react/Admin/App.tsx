@@ -13,7 +13,7 @@ export default class App extends React.Component<{},{content:any}>{
         this.setState({content : <div>Empty</div>})
     }
 
-    AddExtension = () => {
+    AddBloc = () => {
         this.setState({content : <div> 
             <button type="button" className="close" onClick={this.CloseForm} data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -30,7 +30,7 @@ export default class App extends React.Component<{},{content:any}>{
     render(){
         return (
             <div>
-                <button className="btn btn-primary" onClick={this.AddExtension}>Add Extension</button>
+                <button className="btn btn-primary" onClick={this.AddBloc}>Add Bloc</button>
                 <div>
                 
                     {this.state.content}

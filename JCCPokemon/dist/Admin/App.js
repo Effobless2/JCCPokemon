@@ -8,7 +8,7 @@ class App extends React.Component {
         this.CloseForm = () => {
             this.setState({ content: React.createElement("div", null, "Empty") });
         };
-        this.AddExtension = () => {
+        this.AddBloc = () => {
             this.setState({ content: React.createElement("div", null,
                     React.createElement("button", { type: "button", className: "close", onClick: this.CloseForm, "data-dismiss": "modal", "aria-label": "Close" },
                         React.createElement("span", { "aria-hidden": "true" }, "\u00D7")),
@@ -23,7 +23,7 @@ class App extends React.Component {
     }
     render() {
         return (React.createElement("div", null,
-            React.createElement("button", { className: "btn btn-primary", onClick: this.AddExtension }, "Add Extension"),
+            React.createElement("button", { className: "btn btn-primary", onClick: this.AddBloc }, "Add Bloc"),
             React.createElement("div", null, this.state.content)));
     }
 }

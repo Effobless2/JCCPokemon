@@ -14,18 +14,16 @@ export default class BlocFormular extends React.Component<{},{myImage:any, frenc
         }
     }
 
-    sendRequest = async () => {
+    sendRequest = async () => {        
         let frenchName = (document.getElementById("frenchName") as any);
         let englishName = (document.getElementById("englishName") as any);
         let year = parseInt((document.getElementById("yearSelector") as any).value,10);
 
         if (frenchName.value == ""){
-            console.log("french vide");
             this.frenchNameOnChange();
 
         }
         if (englishName.value == ""){
-            console.log("english vide");
             this.englishNameOnChange();
         }
         if (englishName.value != "" && frenchName.value != ""){
@@ -36,9 +34,9 @@ export default class BlocFormular extends React.Component<{},{myImage:any, frenc
             let result = await BlocService.CreateNewBloc(b);
             console.log(result);
             if (result == 200){
-                this.setState({titleText: "Création d'un Bloc - Votre bloc " + frenchName.value + " a été créé !"});
+                this.setState({titleText: frenchName.value + " a été créé !"});
             } else {
-                console.log("ko ?");
+                this.setState({titleText: "La création de " + frenchName.value + " n'a pas aboutit. Rééssayez plus tard."});
             }
             //Envoi au serveur
         }

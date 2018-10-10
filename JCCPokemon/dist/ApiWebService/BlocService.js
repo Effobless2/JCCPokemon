@@ -11,7 +11,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class BlocService {
     static CreateNewBloc(newBloc) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(newBloc);
             let res = yield fetch(`https://localhost:44390/admin/CreateNewBloc`, {
                 method: "POST",
                 body: JSON.stringify(newBloc),
@@ -19,7 +18,8 @@ class BlocService {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 }
-            });
+            }).catch((result) => { return result; });
+            return res.status;
         });
     }
 }
