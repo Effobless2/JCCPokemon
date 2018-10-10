@@ -11,6 +11,7 @@ namespace JCCP.ExtensionConnector
     public interface IExtensionService
     {
         Task<List<Extension>> GetAllExtensions();
+        Task<bool> CreateNewExtension(Extension extension);
     }
 
     public class ExtensionService : IExtensionService
@@ -57,5 +58,24 @@ namespace JCCP.ExtensionConnector
             }
             return res;
         }
-    }
+
+        public async Task<bool> CreateNewExtension(Extension extension)
+        {
+            using (SqlConnection conn = await _sqlService.GetConnection())
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "CreateNewExtension";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EnglishName", extension.EnglishName);
+                    cmd.Parameters.AddWithValue("@FrenchName", extension.FrenchName);
+                    cmd.Parameters.AddWithValue("@Logo", extension.LogoUrl);
+                    cmd.Parameters.AddWithValue("@Img", extension.ImageUrl);
+                    cmd.Parameters.AddWithValue("@IdBloc", extension.BlocId);
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+            return true;
+        }
+     }
 }
