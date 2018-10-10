@@ -8,6 +8,7 @@ using JCCPokemon.Models;
 using JCCP.AuthentificationConnector;
 using JCCP.BlocConnector;
 using JCCP.BO;
+using JCCP.ExtensionConnector;
 
 namespace JCCPokemon.Controllers
 {
@@ -16,17 +17,20 @@ namespace JCCPokemon.Controllers
 
         private readonly IAuthentificationService _authentificationService;
         private readonly IBlocService _blocService;
+        private readonly IExtensionService _extensionService;
 
         public HomeController(IAuthentificationService service,
-                              IBlocService blocService)
+                              IBlocService blocService,
+                              IExtensionService extService)
         {
             _authentificationService = service;
             _blocService = blocService;
+            _extensionService = extService;
         }
 
         public async Task<IActionResult> Index()
         {
-            bool test = await  _blocService.CreateNewBloc(new Bloc() {FrenchName="MonNom", EnglishName="MyName", Year=1995 });
+            string test = await _extensionService.GetAllExtensions();
             return View();
         }
 

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.BO", "JCCP.BO\JCCP.BO.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.BlocConnector", "BlocConnector\JCCP.BlocConnector.csproj", "{49822B0A-0CBD-47AD-8F40-11BB9B014F4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCCP.ExtensionConnector", "JCCP.ExtensionConnector\JCCP.ExtensionConnector.csproj", "{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{49822B0A-0CBD-47AD-8F40-11BB9B014F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49822B0A-0CBD-47AD-8F40-11BB9B014F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49822B0A-0CBD-47AD-8F40-11BB9B014F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

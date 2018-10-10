@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlocConnector\JCCP.BlocConnector.csproj" />
     <ProjectReference Include="..\JCCP.CollectorConnector\JCCP.AuthentificationConnector.csproj" />
+    <ProjectReference Include="..\JCCP.ExtensionConnector\JCCP.ExtensionConnector.csproj" />
     <ProjectReference Include="..\JCCP.SqlConnector\JCCP.SqlConnector.csproj" />
   </ItemGroup>
 
