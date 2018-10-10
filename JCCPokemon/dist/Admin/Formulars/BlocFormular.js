@@ -35,7 +35,7 @@ class BlocFormular extends React.Component {
                     this.setState({ titleText: frenchName.value + " a été créé !" });
                 }
                 else {
-                    this.setState({ titleText: "La création de " + frenchName.value + " n'a pas aboutit. Résseayez plus tard." });
+                    this.setState({ titleText: "La création de " + frenchName.value + " n'a pas aboutit. Rééssayez plus tard." });
                 }
                 //Envoi au serveur
             }
