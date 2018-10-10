@@ -1,5 +1,7 @@
-﻿using JCCP.SqlConnector;
+﻿using JCCP.BO;
+using JCCP.SqlConnector;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -8,7 +10,7 @@ namespace JCCP.ExtensionConnector
 {
     public interface IExtensionService
     {
-        Task<string> GetAllExtensions();
+        Task<List<Extension>> GetAllExtensions();
     }
 
     public class ExtensionService : IExtensionService
@@ -20,9 +22,19 @@ namespace JCCP.ExtensionConnector
             _sqlService = service;
         }
 
-        public async Task<string> GetAllExtensions()
+        public void Fill(SqlDataReader reader, Extension e)
         {
-            string res = "";
+            e.ExtensionId = _sqlService.HasColumn(reader, "ExtensionId") ? (Guid)reader["ExtensionId"] : Guid.Empty;
+            e.FrenchName = _sqlService.HasColumn(reader, "FrenchName") ? (string)reader["FrenchName"] : "";
+            e.EnglishName = _sqlService.HasColumn(reader, "EnglishName") ? (string)reader["EnglishName"] : "";
+            e.ImageUrl = _sqlService.HasColumn(reader, "ImageUrl") ? (string)reader["ImageUrl"] : "";
+            e.LogoUrl = _sqlService.HasColumn(reader, "LogoUrl") ? (string)reader["LogoUrl"] : "";
+            e.BlocId = _sqlService.HasColumn(reader, "BlocId") ? (Guid)reader["BlocId"] : Guid.Empty;
+        }
+
+        public async Task<List<Extension>> GetAllExtensions()
+        {
+            List<Extension> res = new List<Extension>();
             using (SqlConnection conn = await _sqlService.GetConnection())
             {
                 using (var cmd = conn.CreateCommand())
@@ -35,7 +47,9 @@ namespace JCCP.ExtensionConnector
                         {
                             if (_sqlService.HasColumn(reader, "FrenchName"))
                             {
-                                res += reader["FrenchName"];
+                                Extension e = new Extension();
+                                Fill(reader, e);
+                                res.Add(e);
                             }
                         }
                     }

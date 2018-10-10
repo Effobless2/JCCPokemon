@@ -30,7 +30,6 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string test = await _extensionService.GetAllExtensions();
             return View();
         }
 
