@@ -14,7 +14,7 @@ export default class ImageUploaderTemp extends React.Component<{},{myImage: any}
         let file = fileUploader.files[0];
         //this.setState({myImage : URL.createObjectURL(file)})
         let reader = new FileReader();
-        reader.onload = (e) =>{
+        reader.onload = (e : any) =>{
             this.setState({myImage: e.target.result});
         };
         reader.readAsDataURL(file);

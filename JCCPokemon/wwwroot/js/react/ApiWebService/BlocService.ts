@@ -12,4 +12,21 @@ export class BlocService{
         }).catch((result) => {return result;})
         return res.status;
     }
+
+    static async GetAllBlocs(){
+        let res = await fetch('https://localhost:44390/admin/GetAllBlocs', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        }).catch((result) => {return result;})
+        if (res.status == 200){
+            let json = await res.json();
+            let comments = json.map(d => {
+                return d;
+            }) as Bloc[];
+            return comments;
+        }
+    }
 }

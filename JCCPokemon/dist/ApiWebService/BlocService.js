@@ -22,6 +22,25 @@ class BlocService {
             return res.status;
         });
     }
+    static GetAllBlocs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield fetch('https://localhost:44390/admin/GetAllBlocs', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            }).catch((result) => { console.log(result); return result; });
+            if (res.status == 200) {
+                let json = yield res.json();
+                let comments = json.map(d => {
+                    console.log(d);
+                    return d;
+                });
+                //return comments;
+            }
+        });
+    }
 }
 exports.BlocService = BlocService;
 //# sourceMappingURL=BlocService.js.map

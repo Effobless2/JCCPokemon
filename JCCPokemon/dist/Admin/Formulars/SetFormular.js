@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
+const ImageUploaderTemp_1 = require("../../ImageUploaderTemp");
+const BlocService_1 = require("../../ApiWebService/BlocService");
 class SetFormular extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,7 @@ class SetFormular extends React.Component {
             for (let i = end; i > begin - 1; i--) {
                 res.push(i);
             }
+            BlocService_1.BlocService.GetAllBlocs();
             return res.map((i) => {
                 return React.createElement("option", { value: i }, i);
             });
@@ -37,6 +40,7 @@ class SetFormular extends React.Component {
                                 React.createElement("select", { className: "form-control", id: "yearSelector", name: "yearSelector" },
                                     this.renderSelectOptions(),
                                     " /** \u00E0 remplacer */"))),
+                        React.createElement(ImageUploaderTemp_1.default, null),
                         React.createElement("div", { className: "row", style: { display: "flex", justifyContent: "flex-end" } },
                             React.createElement("button", { className: "btn btn-primary", type: "button", onClick: () => console.log("Envoi au serveur") }, "Cr\u00E9er le Set")))))));
     }

@@ -62,6 +62,12 @@ namespace JCCPokemon.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet]
+        public async Task<List<Bloc>> GetAllBlocs()
+        {
+            return await _blocService.GetAllBlocs();
+        }
     }
 
 }

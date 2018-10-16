@@ -1,23 +1,37 @@
 import * as React from "react";
+import ImageUploaderTemp from "../../ImageUploaderTemp";
+import { BlocService } from "../../ApiWebService/BlocService";
+import Bloc from "../../Model/Bloc";
 
-export default class SetFormular extends React.Component{
+export default class SetFormular extends React.Component<{},{blocs : Bloc[], blocOpts : any[]}>{
     constructor(props){
         super(props);
-    }
-
-    renderSelectOptions = () => {
-        let begin = 1995
-        let end = new Date().getFullYear();
-        let res = [];
-        for(let i = end; i>begin-1; i--){
-            res.push(i);
+        this.state = {
+            blocs : [],
+            blocOpts : []
         }
-        return res.map((i) => {
-            return <option value={i}>{i}</option>
-        })
+        
+        BlocService.GetAllBlocs()
+            .then((blocs) => {
+                this.setState({
+                    blocs : blocs,
+                    blocOpts : blocs.map(bloc => {
+                        return <option value = {bloc.idBloc}>{bloc.frenchName}</option>
+                    })
+                });
+                
+            });
     }
+    
+    /*
+    renderSelectOption = () => {
+        this.state.blocs.map((bloc) => {
+                return <option value={bloc.idBloc}>{bloc.frenchName}</option>
+        })
+    }*/
 
     render(){
+
         return (
             <div>
                 <h1 id="TitleForm">Creation de Set</h1>
@@ -44,10 +58,12 @@ export default class SetFormular extends React.Component{
                                     <h2 label-for="yearSelector" className="col-lg-6 col-xs-6">Bloc associé :</h2>
                                     <div className="col-lg-6 col-xs-6">
                                         <select className="form-control" id="yearSelector" name="yearSelector">
-                                            {this.renderSelectOptions()} /** à remplacer */
+                                            {this.state.blocOpts}
                                         </select>
                                     </div>
                                 </div>
+
+                                <ImageUploaderTemp/>
 
                                 <div className="row" style={{display:"flex", justifyContent:"flex-end"}}>
                                     <button className="btn btn-primary" type="button" onClick={() => console.log("Envoi au serveur")}>Créer le Set</button>
