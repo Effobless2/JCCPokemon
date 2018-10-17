@@ -1,5 +1,5 @@
 export default class Bloc{
-    idBloc?: string;
+    blocId?: string;
     frenchName: string;
     englishName: string;
     year: number;

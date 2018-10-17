@@ -30,14 +30,13 @@ class BlocService {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 }
-            }).catch((result) => { console.log(result); return result; });
+            }).catch((result) => { return result; });
             if (res.status == 200) {
                 let json = yield res.json();
                 let comments = json.map(d => {
-                    console.log(d);
                     return d;
                 });
-                //return comments;
+                return comments;
             }
         });
     }

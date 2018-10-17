@@ -13,13 +13,13 @@ class ImageUploaderTemp extends React.Component {
                 this.setState({ myImage: e.target.result });
             };
             reader.readAsDataURL(file);
-            console.log(this.state.myImage);
         };
         this.state = {
             myImage: null
         };
     }
     render() {
+        console.log(this.state.myImage);
         return (React.createElement("div", null,
             React.createElement("input", { type: "file", id: "fileUploader", accept: "image/*", onChange: this.onLoadImage }),
             React.createElement("img", { src: this.state.myImage, height: "150pt", width: "150pt" })));

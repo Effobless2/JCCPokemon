@@ -18,10 +18,10 @@ export default class ImageUploaderTemp extends React.Component<{},{myImage: any}
             this.setState({myImage: e.target.result});
         };
         reader.readAsDataURL(file);
-        console.log(this.state.myImage);
     }
 
     render(){
+        console.log(this.state.myImage);
         return (
             <div>   
                 <input type="file" id="fileUploader" accept="image/*" onChange={this.onLoadImage}/>
