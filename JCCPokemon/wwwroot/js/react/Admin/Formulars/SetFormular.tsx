@@ -33,6 +33,8 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
 
     onLoadImage = () => {
         let fileUploader = document.getElementById("fileUploader") as any;
+        
+        console.log(fileUploader.files[0]);
         let file = fileUploader.files[0];
         //this.setState({myImage : URL.createObjectURL(file)})
         let reader = new FileReader();
@@ -69,10 +71,12 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
         let frenchName = (document.getElementById("frenchName") as any);
         let englishName = (document.getElementById("englishName") as any);
         let curBloc = (document.getElementById("blocSelector") as any);
+        let curImage = (document.getElementById("fileUploader") as any);
 
         let frName = frenchName.value;
         let enName = englishName.value;
         let blocId = curBloc.value;
+        let image = curImage.files[0];
         console.log(frName);
         console.log(enName);
         console.log(blocId);
@@ -80,10 +84,9 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
         let newExtension = new Extension();
         newExtension.frenchName = frName;
         newExtension.englishName = enName;
-        newExtension.image = this.state.myImage;
         newExtension.blocId = blocId;
 
-        ExtensionService.CreateNewExtension(newExtension);
+        ExtensionService.CreateNewExtension(newExtension, image);
     }
     
 

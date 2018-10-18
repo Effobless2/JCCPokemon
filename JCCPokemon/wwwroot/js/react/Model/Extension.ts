@@ -5,5 +5,4 @@ export class Extension{
     logoUrl : string;
     imageUrl? : string;
     blocId : string;
-    image : any;
 }

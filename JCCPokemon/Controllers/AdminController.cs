@@ -6,6 +6,7 @@ using JCCP.BlocConnector;
 using JCCP.BO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JCCPokemon.Controllers
@@ -63,11 +64,16 @@ namespace JCCPokemon.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> CreateNewExtension(List<IFormFile> File, string FrenchName, string EnglishName, Guid BlocId)
+        {
+            return NotFound();
+        }
+
         [HttpGet]
         public async Task<List<Bloc>> GetAllBlocs()
         {
             return await _blocService.GetAllBlocs();
         }
     }
-
 }
