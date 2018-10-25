@@ -15,14 +15,25 @@ const ExtensionService_1 = require("../../ApiWebService/ExtensionService");
 class SetFormular extends React.Component {
     constructor(props) {
         super(props);
-        this.onLoadImage = () => {
-            let fileUploader = document.getElementById("fileUploader");
+        this.onLoadLogo = () => {
+            let fileUploader = document.getElementById("LogoUploader");
             console.log(fileUploader.files[0]);
             let file = fileUploader.files[0];
             //this.setState({myImage : URL.createObjectURL(file)})
             let reader = new FileReader();
             reader.onload = (e) => {
-                this.setState({ myImage: e.target.result });
+                this.setState({ myLogo: e.target.result });
+            };
+            reader.readAsDataURL(file);
+        };
+        this.onLoadSymbol = () => {
+            let fileUploader = document.getElementById("SymboleUploader");
+            console.log(fileUploader.files[0]);
+            let file = fileUploader.files[0];
+            //this.setState({myImage : URL.createObjectURL(file)})
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.setState({ mySymbol: e.target.result });
             };
             reader.readAsDataURL(file);
         };
@@ -52,24 +63,29 @@ class SetFormular extends React.Component {
             let frenchName = document.getElementById("frenchName");
             let englishName = document.getElementById("englishName");
             let curBloc = document.getElementById("blocSelector");
-            let curImage = document.getElementById("fileUploader");
+            let logoUp = document.getElementById("LogoUploader");
+            let symbolUp = document.getElementById("SymboleUploader");
             let frName = frenchName.value;
             let enName = englishName.value;
             let blocId = curBloc.value;
-            let image = curImage.files[0];
+            let logo = logoUp.files[0];
+            let symbol = symbolUp.files[0];
             console.log(frName);
             console.log(enName);
             console.log(blocId);
+            console.log(logo);
+            console.log(symbol);
             let newExtension = new Extension_1.Extension();
             newExtension.frenchName = frName;
             newExtension.englishName = enName;
             newExtension.blocId = blocId;
-            ExtensionService_1.ExtensionService.CreateNewExtension(newExtension, image);
+            ExtensionService_1.ExtensionService.CreateNewExtension(newExtension, logo, symbol);
         });
         this.state = {
             blocs: [],
             blocOpts: [],
-            myImage: null
+            myLogo: null,
+            mySymbol: null
         };
         BlocService_1.BlocService.GetAllBlocs()
             .then((blocs) => {
@@ -99,12 +115,18 @@ class SetFormular extends React.Component {
                         React.createElement("div", { className: "row", style: { display: "flex", alignItems: "center" } },
                             React.createElement("h2", { "label-for": "yearSelector", className: "col-lg-6 col-xs-6" }, "Bloc associ\u00E9 :"),
                             React.createElement("div", { className: "col-lg-6 col-xs-6" },
-                                React.createElement("select", { className: "form-control", id: "blocSelector", name: "blocSelector" }, this.state.blocOpts))),
-                        React.createElement("div", null,
-                            React.createElement("input", { type: "file", id: "fileUploader", accept: "image/*", onChange: this.onLoadImage }),
-                            React.createElement("img", { src: this.state.myImage, height: "150pt", width: "150pt" })),
-                        React.createElement("div", { className: "row", style: { display: "flex", justifyContent: "flex-end" } },
-                            React.createElement("button", { className: "btn btn-primary", type: "button", onClick: this.sendRequest }, "Cr\u00E9er le Set")))))));
+                                React.createElement("select", { className: "form-control", id: "blocSelector", name: "blocSelector" }, this.state.blocOpts))))),
+                React.createElement("div", { className: "row" },
+                    React.createElement("div", { className: "col-lg-6 col-xs-12" },
+                        React.createElement("h2", { "label-for": "LogoUploader", className: "col-lg-6 col-xs-6" }, "Logo de l'Extension :"),
+                        React.createElement("input", { type: "file", id: "LogoUploader", accept: "image/*", onChange: this.onLoadLogo }),
+                        React.createElement("img", { src: this.state.myLogo, height: "150pt", width: "150pt" })),
+                    React.createElement("div", { className: "col-lg-6 col-xs-12" },
+                        React.createElement("h2", { "label-for": "SymboleUploader", className: "col-lg-6 col-xs-6" }, "Symbole de l'Extension :"),
+                        React.createElement("input", { type: "file", id: "SymboleUploader", accept: "image/*", onChange: this.onLoadSymbol }),
+                        React.createElement("img", { src: this.state.mySymbol, height: "150pt", width: "150pt" }))),
+                React.createElement("div", { className: "row", style: { display: "flex", justifyContent: "flex-end" } },
+                    React.createElement("button", { className: "btn btn-primary", type: "button", onClick: this.sendRequest }, "Cr\u00E9er le Set")))));
     }
 }
 exports.default = SetFormular;

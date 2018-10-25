@@ -11,17 +11,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class ExtensionDatas {
 }
 class ExtensionService {
-    static CreateNewExtension(newExtension, image) {
+    static CreateNewExtension(newExtension, logo, symbol) {
         return __awaiter(this, void 0, void 0, function* () {
             let f = new FormData();
-            //f.append("englishName", newExtension.englishName);
-            //f.append("frenchName", newExtension.frenchName);
-            //f.append("blocId", newExtension.blocId);
-            f.append("file", image);
-            console.log(image);
-            console.log(image.name);
-            console.log(image.type);
-            console.log(newExtension);
+            f.append("englishName", newExtension.englishName);
+            f.append("frenchName", newExtension.frenchName);
+            f.append("blocId", newExtension.blocId);
+            f.append("logo", logo);
+            f.append("symbol", symbol);
             /*
             f.append("image", image);
             f.append("newExtension", JSON.stringify(newExtension));*/
@@ -31,21 +28,6 @@ class ExtensionService {
                 console.log(response);
             };
             xhr.send(f);
-            let e = image;
-            /*e.blocId = newExtension.blocId;
-            e.englishName = newExtension.englishName;
-            e.frenchName = newExtension.frenchName;
-            e.imageInfos = image;
-            */ console.log(e);
-            //let res = await fetch(`https://localhost:44390/admin/CreateNewExtension`,{
-            //    method:"POST",
-            //    body: f,
-            //    headers: {
-            //        'Accept': 'application/json, text/plain, */*',
-            //        'Content-Type': 'application/json'
-            //    }
-            //}).catch((result) => {return result;})
-            //return res.status;
         });
     }
 }

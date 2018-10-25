@@ -65,7 +65,7 @@ namespace JCCPokemon.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateNewExtension(List<IFormFile> File, string FrenchName, string EnglishName, Guid BlocId)
+        public async Task<ActionResult> CreateNewExtension(List<IFormFile> logo, List<IFormFile> symbol, string frenchName, string englishName, Guid blocId)
         {
             return NotFound();
         }

@@ -7,7 +7,8 @@ import { ExtensionService } from "../../ApiWebService/ExtensionService";
 interface ExtensionState{
     blocs : Bloc[], 
     blocOpts : any[], 
-    myImage: any
+    myLogo: any,
+    mySymbol: any
 }
 
 export default class SetFormular extends React.Component<{},ExtensionState>{
@@ -16,7 +17,8 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
         this.state = {
             blocs : [],
             blocOpts : [],
-            myImage : null
+            myLogo : null,
+            mySymbol : null
         }
         
         BlocService.GetAllBlocs()
@@ -31,15 +33,28 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
             });
     }
 
-    onLoadImage = () => {
-        let fileUploader = document.getElementById("fileUploader") as any;
+    onLoadLogo = () => {
+        let fileUploader = document.getElementById("LogoUploader") as any;
         
         console.log(fileUploader.files[0]);
         let file = fileUploader.files[0];
         //this.setState({myImage : URL.createObjectURL(file)})
         let reader = new FileReader();
         reader.onload = (e : any) =>{
-            this.setState({myImage: e.target.result});
+            this.setState({myLogo: e.target.result});
+        };
+        reader.readAsDataURL(file);
+    }
+
+    onLoadSymbol = () => {
+        let fileUploader = document.getElementById("SymboleUploader") as any;
+        
+        console.log(fileUploader.files[0]);
+        let file = fileUploader.files[0];
+        //this.setState({myImage : URL.createObjectURL(file)})
+        let reader = new FileReader();
+        reader.onload = (e : any) =>{
+            this.setState({mySymbol: e.target.result});
         };
         reader.readAsDataURL(file);
     }
@@ -71,22 +86,26 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
         let frenchName = (document.getElementById("frenchName") as any);
         let englishName = (document.getElementById("englishName") as any);
         let curBloc = (document.getElementById("blocSelector") as any);
-        let curImage = (document.getElementById("fileUploader") as any);
+        let logoUp = (document.getElementById("LogoUploader") as any);
+        let symbolUp = (document.getElementById("SymboleUploader") as any);
 
         let frName = frenchName.value;
         let enName = englishName.value;
         let blocId = curBloc.value;
-        let image = curImage.files[0];
+        let logo = logoUp.files[0];
+        let symbol = symbolUp.files[0];
         console.log(frName);
         console.log(enName);
         console.log(blocId);
+        console.log(logo);
+        console.log(symbol);
 
         let newExtension = new Extension();
         newExtension.frenchName = frName;
         newExtension.englishName = enName;
         newExtension.blocId = blocId;
 
-        ExtensionService.CreateNewExtension(newExtension, image);
+        ExtensionService.CreateNewExtension(newExtension, logo, symbol);
     }
     
 
@@ -122,19 +141,26 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
                                         </select>
                                     </div>
                                 </div>
-
-                                <div>   
-                                    <input type="file" id="fileUploader" accept="image/*" onChange={this.onLoadImage}/>
-                                    <img src={this.state.myImage} height="150pt" width="150pt"/>       
-                                </div>
-
-                                <div className="row" style={{display:"flex", justifyContent:"flex-end"}}>
-                                    <button className="btn btn-primary" type="button" onClick={this.sendRequest}>Créer le Set</button>
-                                </div>
                             </div>
                             
                         </div>
-                        
+                        <div className="row">
+                                <div className="col-lg-6 col-xs-12">
+                                    <h2 label-for="LogoUploader" className="col-lg-6 col-xs-6">Logo de l'Extension :</h2>
+                                    <input type="file" id="LogoUploader" accept="image/*" onChange={this.onLoadLogo}/>
+                                    <img src={this.state.myLogo} height="150pt" width="150pt"/>       
+                                </div>
+
+                                
+                                <div className="col-lg-6 col-xs-12">
+                                    <h2 label-for="SymboleUploader" className="col-lg-6 col-xs-6">Symbole de l'Extension :</h2>  
+                                    <input type="file" id="SymboleUploader" accept="image/*" onChange={this.onLoadSymbol}/>
+                                    <img src={this.state.mySymbol} height="150pt" width="150pt"/>       
+                                </div>
+                        </div>
+                    </div>
+                    <div className="row" style={{display:"flex", justifyContent:"flex-end"}}>
+                        <button className="btn btn-primary" type="button" onClick={this.sendRequest} style={{marginRight: '5px'}}>Créer le Set</button>
                     </div>
             </div>
         )
