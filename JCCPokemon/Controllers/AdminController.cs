@@ -80,10 +80,12 @@ namespace JCCPokemon.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateNewExtension(List<IFormFile> logo, List<IFormFile> symbol, string frenchName, string englishName, Guid blocId)
         {
-            string symbolUri = SendSymbol(symbol);
-            string logoUri = SendLogo(logo);
+            Guid myguid = Guid.NewGuid();
+            string symbolUri = SendSymbol(symbol, myguid.ToString().Substring(0,5));
+            string logoUri = SendLogo(logo, myguid.ToString().Substring(0, 5));
             Extension e = new Extension()
             {
+                ExtensionId = myguid,
                 LogoUrl = logoUri,
                 SymbolUrl = symbolUri,
                 FrenchName = frenchName,
@@ -99,7 +101,7 @@ namespace JCCPokemon.Controllers
             return NotFound();
         }
 
-        public string SendSymbol(List<IFormFile> files)
+        public string SendSymbol(List<IFormFile> files, string name)
         {
             string baseDirectory = "images\\symbol";
             if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
@@ -110,11 +112,11 @@ namespace JCCPokemon.Controllers
             {
                 using (Stream stream = files[0].OpenReadStream())
                 {
-                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, files[0].FileName + "." + files[0].ContentType.Split('/').Last())))
+                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, name + "." + files[0].ContentType.Split('/').Last())))
                     {
                         stream.Seek(0, SeekOrigin.Begin);
                         stream.CopyTo(fileStream);
-                        uri = Path.Combine(baseDirectory, files[0].FileName + "." + files[0].ContentType.Split('/').Last());
+                        uri = Path.Combine(baseDirectory, name + "." + files[0].ContentType.Split('/').Last());
                     }
                 }
             }
@@ -122,7 +124,7 @@ namespace JCCPokemon.Controllers
             return uri;
         }
 
-        public string SendLogo(List<IFormFile> files)
+        public string SendLogo(List<IFormFile> files, string name)
         {
             string baseDirectory = "images\\logo";
             if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
@@ -133,11 +135,11 @@ namespace JCCPokemon.Controllers
             {
                 using (Stream stream = files[0].OpenReadStream())
                 {
-                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, files[0].FileName + "." + files[0].ContentType.Split('/').Last())))
+                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, name + "." + files[0].ContentType.Split('/').Last())))
                     {
                         stream.Seek(0, SeekOrigin.Begin);
                         stream.CopyTo(fileStream);
-                        uri = Path.Combine(baseDirectory, files[0].FileName + "." + files[0].ContentType.Split('/').Last());
+                        uri = Path.Combine(baseDirectory, name + "." + files[0].ContentType.Split('/').Last());
                     }
                 }
             }
