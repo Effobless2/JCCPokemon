@@ -22,9 +22,9 @@ export class ExtensionService{
         f.append("newExtension", JSON.stringify(newExtension));*/
         let xhr = new XMLHttpRequest();
         xhr.open("POST","/Admin/CreateNewExtension");
-        xhr.onload = (response) => {
-            console.log(response);
+        xhr.onload = () => {
+            console.log(xhr.status);
         }
-        xhr.send(f)
+        xhr.send(f);
     }
 }

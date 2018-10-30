@@ -124,9 +124,9 @@ class SetFormular extends React.Component {
                     React.createElement("div", { className: "col-lg-6 col-xs-12" },
                         React.createElement("h2", { "label-for": "SymboleUploader", className: "col-lg-6 col-xs-6" }, "Symbole de l'Extension :"),
                         React.createElement("input", { type: "file", id: "SymboleUploader", accept: "image/*", onChange: this.onLoadSymbol }),
-                        React.createElement("img", { src: this.state.mySymbol, height: "150pt", width: "150pt" }))),
-                React.createElement("div", { className: "row", style: { display: "flex", justifyContent: "flex-end" } },
-                    React.createElement("button", { className: "btn btn-primary", type: "button", onClick: this.sendRequest }, "Cr\u00E9er le Set")))));
+                        React.createElement("img", { src: this.state.mySymbol, height: "150pt", width: "150pt" })))),
+            React.createElement("div", { className: "row", style: { display: "flex", justifyContent: "flex-end" } },
+                React.createElement("button", { className: "btn btn-primary", type: "button", onClick: this.sendRequest, style: { marginRight: '5px' } }, "Cr\u00E9er le Set"))));
     }
 }
 exports.default = SetFormular;
