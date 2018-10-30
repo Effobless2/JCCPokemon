@@ -30,7 +30,7 @@ BEGIN
 		ExtensionId,
 		EnglishName,
 		FrenchName,
-		ImageUrl,
+		SymbolUrl,
 		LogoUrl,
 		BlocId
 	FROM Extension

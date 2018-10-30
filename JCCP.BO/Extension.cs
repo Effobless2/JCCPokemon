@@ -10,7 +10,7 @@ namespace JCCP.BO
         public string FrenchName { get; set; }
         public string EnglishName { get; set; }
         public string LogoUrl { get; set; }
-        public string ImageUrl { get; set; }
+        public string SymbolUrl { get; set; }
         public Guid BlocId { get; set; }
     }
 }
