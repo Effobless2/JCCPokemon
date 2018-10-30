@@ -3,6 +3,6 @@ CREATE TABLE Extension(
 	FrenchName nvarchar(max),
 	EnglishName nvarchar(max),
 	LogoUrl nvarchar(max),
-	ImageUrl nvarchar(max),
+	SymbolUrl nvarchar(max),
 	BlocId UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Bloc(BlocId)
 )
