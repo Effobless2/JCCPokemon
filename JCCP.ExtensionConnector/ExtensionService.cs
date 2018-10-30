@@ -28,7 +28,7 @@ namespace JCCP.ExtensionConnector
             e.ExtensionId = _sqlService.HasColumn(reader, "ExtensionId") ? (Guid)reader["ExtensionId"] : Guid.Empty;
             e.FrenchName = _sqlService.HasColumn(reader, "FrenchName") ? (string)reader["FrenchName"] : "";
             e.EnglishName = _sqlService.HasColumn(reader, "EnglishName") ? (string)reader["EnglishName"] : "";
-            e.ImageUrl = _sqlService.HasColumn(reader, "ImageUrl") ? (string)reader["ImageUrl"] : "";
+            e.SymbolUrl = _sqlService.HasColumn(reader, "SymbolUrl") ? (string)reader["SymbolUrl"] : "";
             e.LogoUrl = _sqlService.HasColumn(reader, "LogoUrl") ? (string)reader["LogoUrl"] : "";
             e.BlocId = _sqlService.HasColumn(reader, "BlocId") ? (Guid)reader["BlocId"] : Guid.Empty;
         }
@@ -67,10 +67,12 @@ namespace JCCP.ExtensionConnector
                 {
                     cmd.CommandText = "CreateNewExtension";
                     cmd.CommandType = CommandType.StoredProcedure;
+                    if (extension.ExtensionId != Guid.Empty)
+                        cmd.Parameters.AddWithValue("@ExtensionId", extension.ExtensionId);
                     cmd.Parameters.AddWithValue("@EnglishName", extension.EnglishName);
                     cmd.Parameters.AddWithValue("@FrenchName", extension.FrenchName);
                     cmd.Parameters.AddWithValue("@Logo", extension.LogoUrl);
-                    cmd.Parameters.AddWithValue("@Img", extension.ImageUrl);
+                    cmd.Parameters.AddWithValue("@Symbol", extension.SymbolUrl);
                     cmd.Parameters.AddWithValue("@IdBloc", extension.BlocId);
                     await cmd.ExecuteNonQueryAsync();
                 }

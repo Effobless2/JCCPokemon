@@ -85,7 +85,7 @@ namespace JCCPokemon.Controllers
             Extension e = new Extension()
             {
                 LogoUrl = logoUri,
-                ImageUrl = symbolUri,
+                SymbolUrl = symbolUri,
                 FrenchName = frenchName,
                 EnglishName = englishName,
                 BlocId = blocId
