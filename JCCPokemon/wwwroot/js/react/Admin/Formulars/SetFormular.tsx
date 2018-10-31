@@ -8,7 +8,10 @@ interface ExtensionState{
     blocs : Bloc[], 
     blocOpts : any[], 
     myLogo: any,
-    mySymbol: any
+    mySymbol: any,
+    titleText: string,
+    englishStyle : any,
+    frenchStyle : any
 }
 
 export default class SetFormular extends React.Component<{},ExtensionState>{
@@ -18,7 +21,10 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
             blocs : [],
             blocOpts : [],
             myLogo : null,
-            mySymbol : null
+            mySymbol : null,
+            titleText : "Création d'une Extension",
+            frenchStyle: null,
+            englishStyle: null
         }
         
         BlocService.GetAllBlocs()
@@ -33,10 +39,45 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
             });
     }
 
+    sendRequest = async () =>{
+        let frenchName = (document.getElementById("frenchName") as any);
+        let englishName = (document.getElementById("englishName") as any);
+        let curBloc = (document.getElementById("blocSelector") as any);
+        let logoUp = (document.getElementById("LogoUploader") as any);
+        let symbolUp = (document.getElementById("SymboleUploader") as any);
+
+        if (frenchName.value == ""){
+            this.frenchNameOnChange();
+        }
+        if (englishName.value == ""){
+            this.englishNameOnChange();
+        }
+        if (englishName.value != "" && frenchName.value != ""){
+            this.setState({titleText: "Traitement en cours ..."})
+            let frName = frenchName.value;
+            let enName = englishName.value;
+            let blocId = curBloc.value;
+            let logo = logoUp.files[0];
+            let symbol = symbolUp.files[0];
+
+            let newExtension = new Extension();
+            newExtension.frenchName = frName;
+            newExtension.englishName = enName;
+            newExtension.blocId = blocId;
+
+            let result = await ExtensionService.CreateNewExtension(newExtension, logo, symbol);
+            if (result == 200){
+                this.setState({titleText : "L'extension " + newExtension.frenchName + " a été créé !"});
+            } else {
+                this.setState({titleText: "La création de " + newExtension.frenchName + " n'a pas aboutit. Rééssayez plus tard."});
+            }
+        }
+        
+    }
+
     onLoadLogo = () => {
         let fileUploader = document.getElementById("LogoUploader") as any;
         
-        console.log(fileUploader.files[0]);
         let file = fileUploader.files[0];
         //this.setState({myImage : URL.createObjectURL(file)})
         let reader = new FileReader();
@@ -49,7 +90,6 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
     onLoadSymbol = () => {
         let fileUploader = document.getElementById("SymboleUploader") as any;
         
-        console.log(fileUploader.files[0]);
         let file = fileUploader.files[0];
         //this.setState({myImage : URL.createObjectURL(file)})
         let reader = new FileReader();
@@ -62,10 +102,10 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
     frenchNameOnChange = () =>{
         let frName = document.getElementById("frenchName") as any;
         if (frName.value == ""){
-            //this.setState({ frenchStyle : {border: "solid red 1px"}});
+            this.setState({ frenchStyle : {border: "solid red 1px"}});
             frName.placeholder = "Empty name is invalid";
         } else {
-            //this.setState({frenchStyle : null});
+            this.setState({frenchStyle : null});
             frName.placeholder = "Insérez le nom du Bloc";
         }
     }
@@ -74,38 +114,12 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
         
         let enName = document.getElementById("englishName") as any;
         if (enName.value == ""){
-            //this.setState({ englishStyle : {border: "solid red 1px"}});
+            this.setState({ englishStyle : {border: "solid red 1px"}});
             enName.placeholder = "Empty name is invalid";
         } else {
-            //this.setState({englishStyle : null});
+            this.setState({englishStyle : null});
             enName.placeholder = "Insérez le nom du Bloc";
         }
-    }
-
-    sendRequest = async () =>{
-        let frenchName = (document.getElementById("frenchName") as any);
-        let englishName = (document.getElementById("englishName") as any);
-        let curBloc = (document.getElementById("blocSelector") as any);
-        let logoUp = (document.getElementById("LogoUploader") as any);
-        let symbolUp = (document.getElementById("SymboleUploader") as any);
-
-        let frName = frenchName.value;
-        let enName = englishName.value;
-        let blocId = curBloc.value;
-        let logo = logoUp.files[0];
-        let symbol = symbolUp.files[0];
-        console.log(frName);
-        console.log(enName);
-        console.log(blocId);
-        console.log(logo);
-        console.log(symbol);
-
-        let newExtension = new Extension();
-        newExtension.frenchName = frName;
-        newExtension.englishName = enName;
-        newExtension.blocId = blocId;
-
-        ExtensionService.CreateNewExtension(newExtension, logo, symbol);
     }
     
 
@@ -113,21 +127,21 @@ export default class SetFormular extends React.Component<{},ExtensionState>{
 
         return (
             <div>
-                <h1 id="TitleForm">Creation de Set</h1>
+                <h1 id="TitleForm">{this.state.titleText}</h1>
                     <div className="row" style={{display:"flex", alignItems:"flex-end", flexWrap:"wrap"}}>
                         <div className="row">
                             <div className="col-lg-7 col-xs-12">
                                 <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                                     <h2 label-for="frenchName" className="col-lg-6 col-xs-6">Nom français : </h2>
                                     <div className="col-lg-6 col-xs-6">
-                                        <input type="text" name="frenchName" id="frenchName" onChange={this.frenchNameOnChange} /*style={this.state.frenchStyle}*/ className="form-control" placeholder="Insérez le nom du Bloc"/>
+                                        <input type="text" name="frenchName" id="frenchName" onChange={this.frenchNameOnChange} style={this.state.frenchStyle} className="form-control" placeholder="Insérez le nom du Bloc"/>
                                     </div>
                                 </div>
                              
                                 <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                                     <h2 label-for="englishName" className="col-lg-6 col-xs-6">Nom anglais : </h2>
                                     <div className="col-lg-6 col-xs-6">
-                                    <input type="text" name="englishName" id="englishName" onChange={this.englishNameOnChange} /*style={this.state.englishStyle}*/ className="form-control" width="50%" placeholder="Insérez le nom Anglais du Bloc"/>
+                                    <input type="text" name="englishName" id="englishName" onChange={this.englishNameOnChange} style={this.state.englishStyle} className="form-control" width="50%" placeholder="Insérez le nom Anglais du Bloc"/>
                                     </div>
                                     
                                 </div>

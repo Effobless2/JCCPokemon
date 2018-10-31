@@ -10,7 +10,7 @@ class ExtensionDatas{
 
 export class ExtensionService{
 
-    static async CreateNewExtension(newExtension : Extension, logo: any, symbol : any){
+    static async CreateNewExtension(newExtension : Extension, logo: any, symbol : any) : Promise<any>{
         let f = new FormData();
         f.append("englishName", newExtension.englishName);
         f.append("frenchName", newExtension.frenchName);
@@ -22,9 +22,20 @@ export class ExtensionService{
         f.append("newExtension", JSON.stringify(newExtension));*/
         let xhr = new XMLHttpRequest();
         xhr.open("POST","/Admin/CreateNewExtension");
-        xhr.onload = () => {
-            console.log(xhr.status);
-        }
-        xhr.send(f);
+
+        return new Promise((resolve, reject) => {
+            xhr.onload = () => {
+                console.log("poney");
+                if (xhr.status != 200) {
+                    reject(xhr.status);
+                } else {
+                    resolve(xhr.status);
+                }
+            };
+            xhr.onerror =  () => {
+                reject(xhr.status);
+            };            
+            xhr.send(f);
+        });
     }
 }
