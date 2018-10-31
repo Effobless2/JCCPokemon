@@ -26,7 +26,8 @@
     "typescript": "^2.9.2"
   },
   "scripts": {
-    "webpack": "webpack",
+    "webpack:Client": "webpack --config ./webpack.config.Client.js",
+    "webpack:Admin":  "webpack --config ./webpack.config.Admin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

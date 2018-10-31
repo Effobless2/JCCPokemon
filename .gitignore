@@ -259,7 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/JCCPokemon/wwwroot/images
+*.pyc
 /JCCPokemon/dist/Admin/Formulars/BlocFormular.js.map
 /JCCPokemon/dist/Admin/App.js.map
-/JCCPokemon/wwwroot/images/logo
-/JCCPokemon/wwwroot/images/symbol
