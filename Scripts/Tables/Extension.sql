@@ -1,5 +1,5 @@
 CREATE TABLE Extension(
-	ExtensionId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT newsequentialid(),
+	ExtensionId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 	FrenchName nvarchar(max),
 	EnglishName nvarchar(max),
 	LogoUrl nvarchar(max),
