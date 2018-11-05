@@ -1,5 +1,5 @@
 CREATE TABLE Collector(
-	IdCollector UNIQUEIDENTIFIER PRIMARY KEY DEFAULT newsequentialid(),
+	IdCollector UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 	LoginCollector NVARCHAR(max),
 	PasswordCollector NVARCHAR(max)
 )
