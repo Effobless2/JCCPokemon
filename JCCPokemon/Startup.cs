@@ -1,6 +1,7 @@
 ﻿using JCCP.BlocConnector;
 using JCCP.AuthentificationConnector;
 using JCCP.ExtensionConnector;
+using JCCP.PokemonConnector;
 using JCCP.SqlConnector;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,7 @@ namespace JCCPokemon
             services.AddTransient<IAuthentificationService, AuthentificationService>();
             services.AddTransient<IBlocService, BlocService>();
             services.AddTransient<IExtensionService, ExtensionService>();
+            services.AddTransient<IPokemonService,PokemonService>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
