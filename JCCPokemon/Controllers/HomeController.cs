@@ -9,6 +9,7 @@ using JCCP.AuthentificationConnector;
 using JCCP.BlocConnector;
 using JCCP.BO;
 using JCCP.ExtensionConnector;
+using JCCP.PokemonConnector;
 
 namespace JCCPokemon.Controllers
 {
@@ -18,18 +19,22 @@ namespace JCCPokemon.Controllers
         private readonly IAuthentificationService _authentificationService;
         private readonly IBlocService _blocService;
         private readonly IExtensionService _extensionService;
+        private readonly IPokemonService _pokemonService;
 
         public HomeController(IAuthentificationService service,
                               IBlocService blocService,
-                              IExtensionService extService)
+                              IExtensionService extService,
+                              IPokemonService pokemonService)
         {
             _authentificationService = service;
             _blocService = blocService;
             _extensionService = extService;
+            _pokemonService = pokemonService;
         }
 
         public async Task<IActionResult> Index()
         {
+            await _pokemonService.CreateNewPokemon();
             return View();
         }
 
