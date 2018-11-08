@@ -1,4 +1,5 @@
-﻿using JCCP.SqlConnector;
+﻿using JCCP.BO;
+using JCCP.SqlConnector;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace JCCP.PokemonConnector
 {
     public interface IPokemonService
     {
-        Task<bool> CreateNewPokemon();
+        Task<bool> CreateNewPokemon(Pokemon pokemon);
     }
     public class PokemonService : IPokemonService
     {
@@ -18,7 +19,7 @@ namespace JCCP.PokemonConnector
             _sqlService = sqlService;
         }
 
-        public async Task<bool> CreateNewPokemon()
+        public async Task<bool> CreateNewPokemon(Pokemon pokemon)
         {
 
             using(SqlConnection conn = await _sqlService.GetConnection())
@@ -27,11 +28,14 @@ namespace JCCP.PokemonConnector
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "CreateNewPokemon";
-                    //-cmd.Parameters.AddWithValue("@PokemonId", Guid.Empty);
-                    cmd.Parameters.AddWithValue("@NumPokedex", 1);
-                    cmd.Parameters.AddWithValue("@EnglishName", "teste");
-                    cmd.Parameters.AddWithValue("@FrenchName", "testf");
-                    cmd.Parameters.AddWithValue("@ImageUrl", "url");
+                    if (pokemon.PokemonId != Guid.Empty)
+                    {
+                        cmd.Parameters.AddWithValue("@PokemonId", pokemon.PokemonId);
+                    }
+                    cmd.Parameters.AddWithValue("@NumPokedex", pokemon.NumPokedex);
+                    cmd.Parameters.AddWithValue("@EnglishName", pokemon.EnglishName);
+                    cmd.Parameters.AddWithValue("@FrenchName", pokemon.FrenchName);
+                    cmd.Parameters.AddWithValue("@ImageUrl", pokemon.ImageUrl);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }

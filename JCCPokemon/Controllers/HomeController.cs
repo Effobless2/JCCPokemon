@@ -34,7 +34,7 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _pokemonService.CreateNewPokemon();
+            await _pokemonService.CreateNewPokemon(new Pokemon() {PokemonId = Guid.Empty, NumPokedex = 1, FrenchName = "testfr", EnglishName = "testEn", ImageUrl = "ImageUrl" });
             return View();
         }
 
