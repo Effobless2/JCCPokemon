@@ -6,7 +6,7 @@ namespace JCCP.BO
 {
     public class Extension
     {
-        public Guid ExtensionId { get; set; }
+        public Guid ExtensionId { get; set; } = Guid.Empty;
         public string FrenchName { get; set; }
         public string EnglishName { get; set; }
         public string LogoUrl { get; set; }
