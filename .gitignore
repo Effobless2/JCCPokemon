@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /JCCPokemon/dist/Admin/Formulars/BlocFormular.js.map
 /JCCPokemon/dist/Admin/App.js.map
+/JCCPokemon/wwwroot/images
