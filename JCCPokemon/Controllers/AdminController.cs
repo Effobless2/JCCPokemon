@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using JCCP.BlocConnector;
 using JCCP.BO;
 using JCCP.ExtensionConnector;
+using JCCP.PokemonConnector;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
@@ -20,16 +21,19 @@ namespace JCCPokemon.Controllers
         private readonly IBlocService _blocService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IExtensionService _extensionService;
+        private readonly IPokemonService _pokemonService;
 
         public AdminController(
             IBlocService blocService, 
             IExtensionService extensionService,
-            IHostingEnvironment hostingEnvironment
+            IHostingEnvironment hostingEnvironment,
+            IPokemonService pokemonService
             )
         {
             _blocService = blocService;
             _extensionService = extensionService;
             _hostingEnvironment = hostingEnvironment;
+            _pokemonService = pokemonService;
         }
 
         public async Task<IActionResult> Index()
@@ -127,6 +131,52 @@ namespace JCCPokemon.Controllers
         public string SendLogo(List<IFormFile> files, string name)
         {
             string baseDirectory = "images\\logo";
+            if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
+                Directory.CreateDirectory(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory));
+
+            string uri = "";
+            if (files.Count == 1 && files[0].Length > 0)
+            {
+                using (Stream stream = files[0].OpenReadStream())
+                {
+                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, name + "." + files[0].ContentType.Split('/').Last())))
+                    {
+                        stream.Seek(0, SeekOrigin.Begin);
+                        stream.CopyTo(fileStream);
+                        uri = Path.Combine(baseDirectory, name + "." + files[0].ContentType.Split('/').Last());
+                    }
+                }
+            }
+
+            return uri;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateNewPokemon(List<IFormFile> PokemonImage, string FrenchName, string EnglishName, string NumPokedex)
+        {
+            int pokedexNumber = int.Parse(NumPokedex);
+            Guid pokemonId = Guid.NewGuid();
+            string urlImage = SendPokemonImage(PokemonImage, pokemonId.ToString().Substring(0, 5));
+            Pokemon pokemon = new Pokemon()
+            {
+                PokemonId = pokemonId,
+                FrenchName = FrenchName,
+                EnglishName = EnglishName,
+                ImageUrl = urlImage,
+                NumPokedex = pokedexNumber
+
+            };
+            bool res = await _pokemonService.CreateNewPokemon(pokemon);
+            if (res)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        public string SendPokemonImage(List<IFormFile> files, string name)
+        {
+            string baseDirectory = "images\\pokemons";
             if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
                 Directory.CreateDirectory(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory));
 

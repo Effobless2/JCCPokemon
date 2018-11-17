@@ -1,19 +1,17 @@
-import { Extension } from "../Model/Extension";
+import { Pokemon } from "../Model/Pokemon";
 
-export class ExtensionService{
-
-    static async CreateNewExtension(newExtension : Extension, logo: any, symbol : any) : Promise<any>{
+export default class PokemonService{
+    static async CreateNewPokemon(newPokemon : Pokemon, image : any) : Promise<any>{
         let f = new FormData();
-        f.append("englishName", newExtension.englishName);
-        f.append("frenchName", newExtension.frenchName);
-        f.append("blocId", newExtension.blocId);
-        f.append("logo", logo);
-        f.append("symbol", symbol);
-        /*
-        f.append("image", image);
-        f.append("newExtension", JSON.stringify(newExtension));*/
+
+        f.append("EnglishName", newPokemon.englishName);
+        f.append("FrenchName", newPokemon.frenchName);
+        f.append("NumPokedex", newPokemon.numPokedex+"");
+        f.append("PokemonImage", image);
+
         let xhr = new XMLHttpRequest();
-        xhr.open("POST","/Admin/CreateNewExtension");
+
+        xhr.open("POST", "/Admin/CreateNewPokemon");
 
         return new Promise((resolve, reject) => {
             xhr.onload = () =>{

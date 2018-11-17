@@ -1,4 +1,6 @@
 import * as React from 'react'
+import PokemonService from '../../ApiWebService/PokemonService';
+import { Pokemon } from '../../Model/Pokemon';
 
 interface PokemonState{
     myImage: any,
@@ -32,7 +34,7 @@ export default class PokemonFormular extends React.Component<{},PokemonState>{
         reader.readAsDataURL(file);
     }
 
-    sendRequest = () =>{
+    sendRequest = async () =>{
         let frenchNameText = document.getElementById("frenchName") as any
         let englishNameText = document.getElementById("englishName") as any
         let numPokedexText = document.getElementById("pokedexNumber") as any
@@ -48,7 +50,18 @@ export default class PokemonFormular extends React.Component<{},PokemonState>{
             this.englishNameOnChange();
         }
         if (englishNameText.value != "" && frenchNameText.value != "" && !isNaN(numPokedex)){
-            console.log("nickel!")
+            let pokemon : Pokemon = {
+                frenchName : frenchNameText.value,
+                englishName : englishNameText.value,
+                numPokedex : numPokedex
+            }
+            let image = document.getElementById("ImageUploader") as any
+            let result = await PokemonService.CreateNewPokemon(pokemon, image.files[0])
+            if (result == 200){
+                console.log("nice!")
+            } else{
+                console.log("bad")
+            }
         }
 
     }

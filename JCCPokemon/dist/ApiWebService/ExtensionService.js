@@ -8,8 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class ExtensionDatas {
-}
 class ExtensionService {
     static CreateNewExtension(newExtension, logo, symbol) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -26,7 +24,6 @@ class ExtensionService {
             xhr.open("POST", "/Admin/CreateNewExtension");
             return new Promise((resolve, reject) => {
                 xhr.onload = () => {
-                    console.log("poney");
                     if (xhr.status != 200) {
                         reject(xhr.status);
                     }
@@ -37,8 +34,18 @@ class ExtensionService {
                 xhr.onerror = () => {
                     reject(xhr.status);
                 };
+                xhr.onloadend = () => {
+                    if (xhr.status != 200) {
+                        reject(xhr.status);
+                    }
+                    else {
+                        resolve(xhr.status);
+                    }
+                };
                 xhr.send(f);
-            });
+            }).then(() => {
+                return xhr.status;
+            }).catch(err => { return err; });
         });
     }
 }
