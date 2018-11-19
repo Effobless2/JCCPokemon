@@ -10,6 +10,7 @@ using JCCP.ExtensionConnector;
 using JCCP.PokemonConnector;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +70,7 @@ namespace JCCPokemon.Controllers
             return RedirectToAction("Authentification");
         }
         
+
         [HttpPost]
         public async Task<ActionResult> CreateNewBloc([FromBody]Bloc newBloc)
         {
@@ -154,7 +156,15 @@ namespace JCCPokemon.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateNewPokemon(List<IFormFile> PokemonImage, string FrenchName, string EnglishName, string NumPokedex)
         {
-            int pokedexNumber = int.Parse(NumPokedex);
+            int pokedexNumber;
+            try
+            {
+                pokedexNumber = int.Parse(NumPokedex);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
             Guid pokemonId = Guid.NewGuid();
             string urlImage = SendPokemonImage(PokemonImage, pokemonId.ToString().Substring(0, 5));
             Pokemon pokemon = new Pokemon()

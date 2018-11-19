@@ -6,7 +6,8 @@ interface PokemonState{
     myImage: any,
     frenchStyle : any,
     englishStyle : any,
-    pokedexStyle : any
+    pokedexStyle : any,
+    titleText: string
 }
 
 
@@ -18,7 +19,8 @@ export default class PokemonFormular extends React.Component<{},PokemonState>{
             myImage : null,
             frenchStyle : null,
             englishStyle : null,
-            pokedexStyle : null
+            pokedexStyle : null,
+            titleText : "Création d'un Pokémon"
         }
     }
 
@@ -58,9 +60,9 @@ export default class PokemonFormular extends React.Component<{},PokemonState>{
             let image = document.getElementById("ImageUploader") as any
             let result = await PokemonService.CreateNewPokemon(pokemon, image.files[0])
             if (result == 200){
-                console.log("nice!")
+                this.setState({titleText : "Le pokémon "+pokemon.frenchName+" a été créé avec succès !"})
             } else{
-                console.log("bad")
+                this.setState({titleText : "La création du pokémon "+pokemon.frenchName+" n'a pas aboutit. Rééssayez plus tard."})
             }
         }
 
@@ -107,7 +109,7 @@ export default class PokemonFormular extends React.Component<{},PokemonState>{
     render(){
         return (
             <div>
-                <h1 id="TitleForm">Pokemon</h1>
+                <h1 id="TitleForm">{this.state.titleText}</h1>
                 <div className="row" style={{display:"flex", alignItems:"flex-end", flexWrap:"wrap"}}>
                     <div className="row">
                         <div className="col-lg-7 col-xs-12">
