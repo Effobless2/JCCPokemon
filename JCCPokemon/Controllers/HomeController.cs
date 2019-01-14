@@ -10,6 +10,7 @@ using JCCP.BlocConnector;
 using JCCP.BO;
 using JCCP.ExtensionConnector;
 using JCCP.PokemonConnector;
+using JCCP.CardConnector;
 
 namespace JCCPokemon.Controllers
 {
@@ -20,20 +21,24 @@ namespace JCCPokemon.Controllers
         private readonly IBlocService _blocService;
         private readonly IExtensionService _extensionService;
         private readonly IPokemonService _pokemonService;
+        private readonly ICardService _cardService;
 
         public HomeController(IAuthentificationService service,
                               IBlocService blocService,
                               IExtensionService extService,
-                              IPokemonService pokemonService)
+                              IPokemonService pokemonService,
+                              ICardService cardService)
         {
             _authentificationService = service;
             _blocService = blocService;
             _extensionService = extService;
             _pokemonService = pokemonService;
+            _cardService = cardService;
         }
 
         public async Task<IActionResult> Index()
         {
+            await _cardService.CreateNewCard();
             return View();
         }
 
