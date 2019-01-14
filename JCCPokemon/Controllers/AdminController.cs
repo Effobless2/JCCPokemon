@@ -58,7 +58,8 @@ namespace JCCPokemon.Controllers
             {
                 List<Claim> claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, login)
+                    new Claim(ClaimTypes.Name, login),
+                    new Claim(ClaimTypes.Role, "admin")
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -70,8 +71,8 @@ namespace JCCPokemon.Controllers
             return RedirectToAction("Authentification");
         }
         
-
         [HttpPost]
+        [Authorize(Policy = "IsAdmin")]
         public async Task<ActionResult> CreateNewBloc([FromBody]Bloc newBloc)
         {
 
@@ -84,6 +85,7 @@ namespace JCCPokemon.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "IsAdmin")]
         public async Task<ActionResult> CreateNewExtension(List<IFormFile> logo, List<IFormFile> symbol, string frenchName, string englishName, Guid blocId)
         {
             Guid myguid = Guid.NewGuid();
@@ -153,6 +155,7 @@ namespace JCCPokemon.Controllers
             return uri;
         }
 
+        [Authorize(Policy = "IsAdmin")]
         [HttpPost]
         public async Task<ActionResult> CreateNewPokemon(List<IFormFile> PokemonImage, string FrenchName, string EnglishName, string NumPokedex)
         {
