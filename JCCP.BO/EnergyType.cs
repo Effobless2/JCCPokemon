@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JCCP.BO
 {
-    class EnergyType
+    public class EnergyType
     {
         public Guid TypeId { get; set; }
         public string FrenchName { get; set; }

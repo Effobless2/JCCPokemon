@@ -42,7 +42,7 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Guid id = await _energyTypeService.CreateNewEnergyType();
+            EnergyType id = await _energyTypeService.CreateNewEnergyType(new EnergyType() { TypeId = Guid.NewGuid(), FrenchName = "MonTestFinal", EnglishName = "MyFinalTest", Logo = "MonLogo" });
             return View();
         }
 
