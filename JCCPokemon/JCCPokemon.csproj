@@ -11,11 +11,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlocConnector\JCCP.BlocConnector.csproj" />
-    <ProjectReference Include="..\EnergyTypeConnector\EnergyTypeConnector.csproj" />
+    <ProjectReference Include="..\EnergyTypeConnector\JCCP.EnergyTypeConnector.csproj" />
     <ProjectReference Include="..\JCCP.CardConnector\JCCP.CardConnector.csproj" />
     <ProjectReference Include="..\JCCP.CollectorConnector\JCCP.AuthentificationConnector.csproj" />
     <ProjectReference Include="..\JCCP.ExtensionConnector\JCCP.ExtensionConnector.csproj" />
     <ProjectReference Include="..\JCCP.PokemonConnector\JCCP.PokemonConnector.csproj" />
+    <ProjectReference Include="..\JCCP.RarityConnector\JCCP.RarityConnector.csproj" />
     <ProjectReference Include="..\JCCP.SqlConnector\JCCP.SqlConnector.csproj" />
   </ItemGroup>
 

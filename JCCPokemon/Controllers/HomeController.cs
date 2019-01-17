@@ -12,6 +12,7 @@ using JCCP.ExtensionConnector;
 using JCCP.PokemonConnector;
 using JCCP.CardConnector;
 using EnergyTypeConnector;
+using JCCP.RarityConnector;
 
 namespace JCCPokemon.Controllers
 {
@@ -24,13 +25,15 @@ namespace JCCPokemon.Controllers
         private readonly IPokemonService _pokemonService;
         private readonly ICardService _cardService;
         private readonly IEnergyTypeService _energyTypeService;
+        private readonly IRarityService _rarityService;
 
         public HomeController(IAuthentificationService service,
                               IBlocService blocService,
                               IExtensionService extService,
                               IPokemonService pokemonService,
                               ICardService cardService,
-                              IEnergyTypeService energyTypeService)
+                              IEnergyTypeService energyTypeService,
+                              IRarityService rarityService)
         {
             _authentificationService = service;
             _blocService = blocService;
@@ -38,11 +41,12 @@ namespace JCCPokemon.Controllers
             _pokemonService = pokemonService;
             _cardService = cardService;
             _energyTypeService = energyTypeService;
+            _rarityService = rarityService;
         }
 
         public async Task<IActionResult> Index()
         {
-            EnergyType id = await _energyTypeService.CreateNewEnergyType(new EnergyType() { TypeId = Guid.NewGuid(), FrenchName = "MonTestFinal", EnglishName = "MyFinalTest", Logo = "MonLogo" });
+            Rarity id = await _rarityService.CreateNewRarity(new Rarity() { RarityId = Guid.NewGuid(), FrenchName = "MonTestFinal", EnglishName = "MyFinalTest2", Logo = "MonLogo" });
             return View();
         }
 
