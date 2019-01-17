@@ -11,6 +11,7 @@ using JCCP.BO;
 using JCCP.ExtensionConnector;
 using JCCP.PokemonConnector;
 using JCCP.CardConnector;
+using EnergyTypeConnector;
 
 namespace JCCPokemon.Controllers
 {
@@ -22,23 +23,26 @@ namespace JCCPokemon.Controllers
         private readonly IExtensionService _extensionService;
         private readonly IPokemonService _pokemonService;
         private readonly ICardService _cardService;
+        private readonly IEnergyTypeService _energyTypeService;
 
         public HomeController(IAuthentificationService service,
                               IBlocService blocService,
                               IExtensionService extService,
                               IPokemonService pokemonService,
-                              ICardService cardService)
+                              ICardService cardService,
+                              IEnergyTypeService energyTypeService)
         {
             _authentificationService = service;
             _blocService = blocService;
             _extensionService = extService;
             _pokemonService = pokemonService;
             _cardService = cardService;
+            _energyTypeService = energyTypeService;
         }
 
         public async Task<IActionResult> Index()
         {
-            await _cardService.CreateNewCard();
+            Guid id = await _energyTypeService.CreateNewEnergyType();
             return View();
         }
 
