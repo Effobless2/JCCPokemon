@@ -46,7 +46,7 @@ namespace JCCPokemon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Rarity id = await _rarityService.CreateNewRarity(new Rarity() { RarityId = Guid.NewGuid(), FrenchName = "MonTestFinal", EnglishName = "MyFinalTest2", Logo = "MonLogo" });
+            Rarity id = await _rarityService.CreateNewRarity(new Rarity() { RarityId = Guid.Empty, FrenchName = "MonTestFinal", EnglishName = "MyFinalTest2", Logo = "MonLogo" });
             return View();
         }
 

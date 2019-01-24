@@ -2,6 +2,7 @@
 using JCCP.SqlConnector;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ namespace JCCP.RarityConnector
 
         public async Task<Rarity> CreateNewRarity(Rarity rarity)
         {
+
             using (SqlConnection conn = await _sqlService.GetConnection())
             {
                 using(SqlCommand cmd = conn.CreateCommand())
@@ -46,19 +48,16 @@ namespace JCCP.RarityConnector
                     cmd.Parameters.AddWithValue("@EnglishName", rarity.EnglishName);
                     cmd.Parameters.AddWithValue("@Logo", rarity.Logo);
 
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
+                    var outpute = cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
+                    outpute.Direction = ParameterDirection.Output;
 
-            List<Rarity> l = await GetAllRarities();
-            foreach(Rarity r in l)
-            {
-                if (r.FrenchName == rarity.FrenchName && r.EnglishName == rarity.EnglishName && r.Logo == rarity.Logo)
-                {
-                    return r;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    rarity.RarityId = (Guid)outpute.Value;
                 }
             }
-            return null;
+            return rarity;
         }
 
         public async Task<List<Rarity>> GetAllRarities()
