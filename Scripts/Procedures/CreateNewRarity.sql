@@ -12,12 +12,12 @@ CREATE PROCEDURE CreateNewRarity
 	@RarityId UNIQUEIDENTIFIER = NULL,
 	@FrenchName nvarchar(max),
 	@EnglishName nvarchar(max),
-	@Logo nvarchar(max)
+	@Logo nvarchar(max),
+	@Id  UNIQUEIDENTIFIER = NULL OUTPUT
 AS
 BEGIN
-	DECLARE @curId UNIQUEIDENTIFIER = @RarityId;
 	if @RarityId is null
-		SET @curId = NEWID();
+		SET @RarityId = NEWID();
 	INSERT INTO Rarity(
 		RarityId,
 		FrenchName,
@@ -29,6 +29,7 @@ BEGIN
 		@EnglishName,
 		@Logo
 	)
+	SELECT @Id = @RarityId
 
 END
 GO
