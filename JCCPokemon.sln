@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.BlocConnector", "BlocC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.ExtensionConnector", "JCCP.ExtensionConnector\JCCP.ExtensionConnector.csproj", "{01296DE1-9D75-4B4E-BC26-8C5C8F668B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCCP.PokemonConnector", "JCCP.PokemonConnector\JCCP.PokemonConnector.csproj", "{F9F052AD-BE0B-4D7C-B55D-9E1994DB1FA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.PokemonConnector", "JCCP.PokemonConnector\JCCP.PokemonConnector.csproj", "{F9F052AD-BE0B-4D7C-B55D-9E1994DB1FA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.CardConnector", "JCCP.CardConnector\JCCP.CardConnector.csproj", "{B165E8EA-563B-42D3-89C6-C139AEBE6807}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.EnergyTypeConnector", "EnergyTypeConnector\JCCP.EnergyTypeConnector.csproj", "{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCCP.RarityConnector", "JCCP.RarityConnector\JCCP.RarityConnector.csproj", "{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +57,18 @@ Global
 		{F9F052AD-BE0B-4D7C-B55D-9E1994DB1FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9F052AD-BE0B-4D7C-B55D-9E1994DB1FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9F052AD-BE0B-4D7C-B55D-9E1994DB1FA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B165E8EA-563B-42D3-89C6-C139AEBE6807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B165E8EA-563B-42D3-89C6-C139AEBE6807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B165E8EA-563B-42D3-89C6-C139AEBE6807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B165E8EA-563B-42D3-89C6-C139AEBE6807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
