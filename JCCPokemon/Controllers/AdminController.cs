@@ -8,6 +8,7 @@ using JCCP.BlocConnector;
 using JCCP.BO;
 using JCCP.ExtensionConnector;
 using JCCP.PokemonConnector;
+using JCCP.RarityConnector;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -23,18 +24,21 @@ namespace JCCPokemon.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IExtensionService _extensionService;
         private readonly IPokemonService _pokemonService;
+        private readonly IRarityService _rarityService;
 
         public AdminController(
             IBlocService blocService, 
             IExtensionService extensionService,
             IHostingEnvironment hostingEnvironment,
-            IPokemonService pokemonService
+            IPokemonService pokemonService,
+            IRarityService rarityService
             )
         {
             _blocService = blocService;
             _extensionService = extensionService;
             _hostingEnvironment = hostingEnvironment;
             _pokemonService = pokemonService;
+            _rarityService = rarityService;
         }
 
         public async Task<IActionResult> Index()
@@ -207,6 +211,52 @@ namespace JCCPokemon.Controllers
                 }
             }
 
+            return uri;
+        }
+
+
+        [Authorize(Policy = "IsAdmin")]
+        [HttpPost]
+        public async Task<ActionResult> CreateNewRarity(string frenchName, string englishName, List<IFormFile> logo)
+        {
+            Guid id = Guid.NewGuid();
+            Rarity rarity = new Rarity() {
+                RarityId = id,
+                FrenchName = frenchName,
+                EnglishName = englishName,
+                Logo = SendRarityImage(logo, id.ToString().Substring(0,5))
+            };
+            
+            bool res = await _rarityService.CreateNewRarity(rarity);
+            if (res)
+            {
+                return Ok();
+            } else
+            {
+                return NotFound();
+            }
+
+        }
+
+        public string SendRarityImage(List<IFormFile> files, string name)
+        {
+            string baseDirectory = "images\\rarity";
+            if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
+                Directory.CreateDirectory(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory));
+
+            string uri = "";
+            if (files.Count == 1 && files[0].Length > 0)
+            {
+                using (Stream stream = files[0].OpenReadStream())
+                {
+                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, name + "." + files[0].ContentType.Split('/').Last())))
+                    {
+                        stream.Seek(0, SeekOrigin.Begin);
+                        stream.CopyTo(fileStream);
+                        uri = Path.Combine(baseDirectory, name + "." + files[0].ContentType.Split('/').Last());
+                    }
+                }
+            }
             return uri;
         }
 

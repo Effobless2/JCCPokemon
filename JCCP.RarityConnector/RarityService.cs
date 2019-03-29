@@ -10,7 +10,7 @@ namespace JCCP.RarityConnector
 {
     public interface IRarityService
     {
-        Task<Rarity> CreateNewRarity(Rarity rarity);
+        Task<bool> CreateNewRarity(Rarity rarity);
         Task<List<Rarity>> GetAllRarities();
     }
 
@@ -31,7 +31,7 @@ namespace JCCP.RarityConnector
             rarity.Logo = _sqlService.HasColumn(reader, "Logo") ? (string)reader["Logo"] : null;
         }
 
-        public async Task<Rarity> CreateNewRarity(Rarity rarity)
+        public async Task<bool> CreateNewRarity(Rarity rarity)
         {
 
             using (SqlConnection conn = await _sqlService.GetConnection())
@@ -57,7 +57,7 @@ namespace JCCP.RarityConnector
                     rarity.RarityId = (Guid)outpute.Value;
                 }
             }
-            return rarity;
+            return true;
         }
 
         public async Task<List<Rarity>> GetAllRarities()
