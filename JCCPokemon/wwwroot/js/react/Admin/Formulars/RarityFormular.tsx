@@ -4,8 +4,9 @@ import { RarityService } from "../../ApiWebService/RarityService";
 
 interface RarityState{
     myLogo : any,
-    frenchName : string,
-    englishName : string
+    frenchStyle : any,
+    englishStyle : any,
+    titleText : string
 }
 
 export default class RarityFormular extends React.Component<any,RarityState>{
@@ -16,18 +17,19 @@ export default class RarityFormular extends React.Component<any,RarityState>{
         this.state={
             
             myLogo : null,
-            frenchName : "",
-            englishName : ""
+            frenchStyle : null,
+            englishStyle : null,
+            titleText: "Nouvelle rareté !"
         }
     }
 
     frenchNameOnChange = () =>{
         let frName = document.getElementById("frenchName") as any;
         if (frName.value == ""){
-            //this.setState({ frenchStyle : {border: "solid red 1px"}});
+            this.setState({ frenchStyle : {border: "solid red 1px"}});
             frName.placeholder = "Empty name is invalid";
         } else {
-            //this.setState({frenchStyle : null});
+            this.setState({frenchStyle : null});
             frName.placeholder = "Insérez le nom du Bloc";
         }
     }
@@ -36,10 +38,10 @@ export default class RarityFormular extends React.Component<any,RarityState>{
         
         let enName = document.getElementById("englishName") as any;
         if (enName.value == ""){
-            //this.setState({ englishStyle : {border: "solid red 1px"}});
+            this.setState({ englishStyle : {border: "solid red 1px"}});
             enName.placeholder = "Empty name is invalid";
         } else {
-            //this.setState({englishStyle : null});
+            this.setState({englishStyle : null});
             enName.placeholder = "Insérez le nom du Bloc";
         }
     }
@@ -60,6 +62,13 @@ export default class RarityFormular extends React.Component<any,RarityState>{
         let frenchName = (document.getElementById("frenchName") as any).value;
         let englishName = (document.getElementById("englishName") as any).value;
         let logoUp = (document.getElementById("LogoUploader") as any);
+
+        if (frenchName == ""){
+            this.frenchNameOnChange();
+        }
+        if (englishName == ""){
+            this.englishNameOnChange();
+        }
         if (frenchName != "" && englishName !=""){
             console.log(frenchName);
             console.log(englishName);
@@ -67,7 +76,13 @@ export default class RarityFormular extends React.Component<any,RarityState>{
             let rarity = new Rarity();
             rarity.frenchName = frenchName;
             rarity.englishName = englishName;
-            await RarityService.createNewRarity(rarity, logo);
+            let result = await RarityService.createNewRarity(rarity, logo);
+
+            if (result == 200){
+                this.setState({titleText : "L'a rareté " + rarity.frenchName + " a été créé !"});
+            } else {
+                this.setState({titleText: "La création de " + rarity.frenchName + " n'a pas aboutit. Rééssayez plus tard."});
+            }
 
         }
     };
@@ -75,20 +90,20 @@ export default class RarityFormular extends React.Component<any,RarityState>{
     render(){
         return (
             <div>
-                <h1>Hello Rarity !</h1>
+                <h1>{this.state.titleText}</h1>
                 <div className="row" style={{display:"flex", alignItems:"flex-start", flexWrap:"wrap"}}>
                     <div className="col-lg-6 col-xs-12">
                         <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                             <h2 label-for="frenchName" className="col-lg-6 col-xs-6">Nom français : </h2>
                             <div className="col-lg-6 col-xs-6">
-                                <input type="text" name="frenchName" id="frenchName" /*onChange={this.frenchNameOnChange} style={this.state.frenchStyle}*/ className="form-control" placeholder="Insérez le nom"/>
+                                <input type="text" name="frenchName" id="frenchName" onChange={this.frenchNameOnChange} style={this.state.frenchStyle} className="form-control" placeholder="Insérez le nom"/>
                             </div>
                         </div>
                      
                         <div className="row" style={{display: "flex", alignItems: "baseline"}}>
                             <h2 label-for="englishName" className="col-lg-6 col-xs-6">Nom anglais : </h2>
                             <div className="col-lg-6 col-xs-6">
-                            <input type="text" name="englishName" id="englishName" /*onChange={this.englishNameOnChange} style={this.state.englishStyle}*/ className="form-control" width="50%" placeholder="Insérez le nom"/>
+                            <input type="text" name="englishName" id="englishName" onChange={this.englishNameOnChange} style={this.state.englishStyle} className="form-control" width="50%" placeholder="Insérez le nom"/>
                             </div>
                             
                         </div>
