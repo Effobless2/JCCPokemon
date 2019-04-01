@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.CardConnector", "JCCP.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.EnergyTypeConnector", "EnergyTypeConnector\JCCP.EnergyTypeConnector.csproj", "{2D9B4497-8E29-4C24-9CF5-7AEADD391D1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCCP.RarityConnector", "JCCP.RarityConnector\JCCP.RarityConnector.csproj", "{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCCP.RarityConnector", "JCCP.RarityConnector\JCCP.RarityConnector.csproj", "{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCCP.FormatConnector", "JCCP.FormatConnector\JCCP.FormatConnector.csproj", "{EF0A2A65-FD17-47A5-820D-066AC128B6F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D14AC2-D0D3-41C3-B7C8-6E058B84D095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF0A2A65-FD17-47A5-820D-066AC128B6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0A2A65-FD17-47A5-820D-066AC128B6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0A2A65-FD17-47A5-820D-066AC128B6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0A2A65-FD17-47A5-820D-066AC128B6F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

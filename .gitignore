@@ -269,3 +269,9 @@ __pycache__/
 /JCCPokemon/dist/Admin/Formulars/BlocFormular.js.map
 /JCCPokemon/dist/Admin/App.js.map
 /JCCPokemon/wwwroot/images
+/JCCPokemon/dist/Admin/Formulars/RarityFormular.js
+/JCCPokemon/dist/Admin/Formulars/RarityFormular.js.map
+/JCCPokemon/dist/ApiWebService/RarityService.js
+/JCCPokemon/dist/ApiWebService/RarityService.js.map
+/JCCPokemon/dist/Model/Rarity.js
+/JCCPokemon/dist/Model/Rarity.js.map
