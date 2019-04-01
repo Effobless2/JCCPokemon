@@ -24,7 +24,7 @@ class BlocService {
     }
     static GetAllBlocs() {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield fetch('https://localhost:44390/admin/GetAllBlocs', {
+            let res = yield fetch('https://localhost:44390/api/Bloc/GetAllBlocs', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

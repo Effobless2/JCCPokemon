@@ -14,7 +14,7 @@ export class BlocService{
     }
 
     static async GetAllBlocs(){
-        let res = await fetch('https://localhost:44390/admin/GetAllBlocs', {
+        let res = await fetch('https://localhost:44390/api/Bloc/GetAllBlocs', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
