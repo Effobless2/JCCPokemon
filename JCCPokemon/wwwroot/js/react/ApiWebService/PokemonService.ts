@@ -11,7 +11,7 @@ export default class PokemonService{
 
         let xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "/Admin/CreateNewPokemon");
+        xhr.open("POST", "/api/Pokemon/CreateNewPokemon");
 
         return new Promise((resolve, reject) => {
             xhr.onload = () =>{

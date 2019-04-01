@@ -17,7 +17,7 @@ class PokemonService {
             f.append("NumPokedex", newPokemon.numPokedex + "");
             f.append("PokemonImage", image);
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "/Admin/CreateNewPokemon");
+            xhr.open("POST", "/api/Pokemon/CreateNewPokemon");
             return new Promise((resolve, reject) => {
                 xhr.onload = () => {
                     if (xhr.status != 200) {
