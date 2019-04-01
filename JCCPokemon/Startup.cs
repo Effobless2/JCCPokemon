@@ -3,6 +3,7 @@ using JCCP.AuthentificationConnector;
 using JCCP.BlocConnector;
 using JCCP.CardConnector;
 using JCCP.ExtensionConnector;
+using JCCP.FormatConnector;
 using JCCP.PokemonConnector;
 using JCCP.RarityConnector;
 using JCCP.SqlConnector;
@@ -36,6 +37,7 @@ namespace JCCPokemon
             services.AddTransient<ICardService, CardService > ();
             services.AddTransient<IEnergyTypeService, EnergyTypeService>();
             services.AddTransient<IRarityService, RarityService>();
+            services.AddTransient<IFormatService, FormatService>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

@@ -15,6 +15,7 @@
     <ProjectReference Include="..\JCCP.CardConnector\JCCP.CardConnector.csproj" />
     <ProjectReference Include="..\JCCP.CollectorConnector\JCCP.AuthentificationConnector.csproj" />
     <ProjectReference Include="..\JCCP.ExtensionConnector\JCCP.ExtensionConnector.csproj" />
+    <ProjectReference Include="..\JCCP.FormatConnector\JCCP.FormatConnector.csproj" />
     <ProjectReference Include="..\JCCP.PokemonConnector\JCCP.PokemonConnector.csproj" />
     <ProjectReference Include="..\JCCP.RarityConnector\JCCP.RarityConnector.csproj" />
     <ProjectReference Include="..\JCCP.SqlConnector\JCCP.SqlConnector.csproj" />
