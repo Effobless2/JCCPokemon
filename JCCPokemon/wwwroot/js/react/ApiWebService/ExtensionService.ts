@@ -13,7 +13,7 @@ export class ExtensionService{
         f.append("image", image);
         f.append("newExtension", JSON.stringify(newExtension));*/
         let xhr = new XMLHttpRequest();
-        xhr.open("POST","/Admin/CreateNewExtension");
+        xhr.open("POST","/api/Extension/CreateNewExtension");
 
         return new Promise((resolve, reject) => {
             xhr.onload = () =>{

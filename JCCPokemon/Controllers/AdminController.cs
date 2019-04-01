@@ -78,19 +78,6 @@ namespace JCCPokemon.Controllers
             }
             return RedirectToAction("Authentification");
         }
-        
-        [HttpPost]
-        [Authorize(Policy = "IsAdmin")]
-        public async Task<ActionResult> CreateNewBloc([FromBody]Bloc newBloc)
-        {
-
-            if (newBloc.FrenchName != null && newBloc.EnglishName != null && newBloc.Year > 1994 && newBloc.Year < DateTime.Now.Year+1)
-            {
-                await _blocService.CreateNewBloc(newBloc);
-                return Ok();
-            }
-            return NotFound();
-        }
 
         [HttpPost]
         [Authorize(Policy = "IsAdmin")]
