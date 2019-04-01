@@ -9,7 +9,7 @@ export class FormatService{
 
         let xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "/Admin/CreateNewFormat");
+        xhr.open("POST", "/api/Format/CreateNewFormat");
 
         return new Promise((resolve, reject) => {
             xhr.onload = () =>{

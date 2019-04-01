@@ -218,52 +218,6 @@ namespace JCCPokemon.Controllers
             return uri;
         }
 
-
-        [Authorize(Policy = "IsAdmin")]
-        [HttpPost]
-        public async Task<ActionResult> CreateNewRarity(string frenchName, string englishName, List<IFormFile> logo)
-        {
-            Guid id = Guid.NewGuid();
-            Rarity rarity = new Rarity() {
-                RarityId = id,
-                FrenchName = frenchName,
-                EnglishName = englishName,
-                Logo = SendRarityImage(logo, id.ToString().Substring(0,5))
-            };
-            
-            bool res = await _rarityService.CreateNewRarity(rarity);
-            if (res)
-            {
-                return Ok();
-            } else
-            {
-                return NotFound();
-            }
-
-        }
-
-        public string SendRarityImage(List<IFormFile> files, string name)
-        {
-            string baseDirectory = "images\\rarity";
-            if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory)))
-                Directory.CreateDirectory(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory));
-
-            string uri = "";
-            if (files.Count == 1 && files[0].Length > 0)
-            {
-                using (Stream stream = files[0].OpenReadStream())
-                {
-                    using (var fileStream = System.IO.File.Create(Path.Combine(_hostingEnvironment.WebRootPath, baseDirectory, name + "." + files[0].ContentType.Split('/').Last())))
-                    {
-                        stream.Seek(0, SeekOrigin.Begin);
-                        stream.CopyTo(fileStream);
-                        uri = Path.Combine(baseDirectory, name + "." + files[0].ContentType.Split('/').Last());
-                    }
-                }
-            }
-            return uri;
-        }
-
         [HttpGet]
         public async Task<List<Bloc>> GetAllBlocs()
         {

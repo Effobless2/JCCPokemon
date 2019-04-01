@@ -14,7 +14,7 @@ namespace JCCPokemon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RarityController : Controller
+    public class RarityController : ControllerBase
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IRarityService _rarityService;
