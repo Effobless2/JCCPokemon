@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using JCCP.BlocConnector;
 using JCCP.BO;
 using JCCP.ExtensionConnector;
+using JCCP.FormatConnector;
 using JCCP.PokemonConnector;
 using JCCP.RarityConnector;
 using Microsoft.AspNetCore.Authentication;
@@ -25,13 +26,15 @@ namespace JCCPokemon.Controllers
         private readonly IExtensionService _extensionService;
         private readonly IPokemonService _pokemonService;
         private readonly IRarityService _rarityService;
+        private readonly IFormatService _formatService;
 
         public AdminController(
             IBlocService blocService, 
             IExtensionService extensionService,
             IHostingEnvironment hostingEnvironment,
             IPokemonService pokemonService,
-            IRarityService rarityService
+            IRarityService rarityService,
+            IFormatService formatService
             )
         {
             _blocService = blocService;
@@ -39,6 +42,7 @@ namespace JCCPokemon.Controllers
             _hostingEnvironment = hostingEnvironment;
             _pokemonService = pokemonService;
             _rarityService = rarityService;
+            _formatService = formatService;
         }
 
         public async Task<IActionResult> Index()
@@ -264,6 +268,18 @@ namespace JCCPokemon.Controllers
         public async Task<List<Bloc>> GetAllBlocs()
         {
             return await _blocService.GetAllBlocs();
+        }
+
+        [Authorize(Policy = "IsAdmin")]
+        [HttpPost]
+        public async Task<ActionResult> CreateNewFormat(string FrenchName, string EnglishName)
+        {
+            bool res = await _formatService.CreateNewFormat(new Format() { FrenchName = FrenchName, EnglishName = EnglishName });
+            if (res) {
+                return Ok();
+            } else {
+                return NotFound();
+            }
         }
     }
 }
