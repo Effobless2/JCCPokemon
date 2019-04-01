@@ -2,7 +2,7 @@ import Bloc from "../Model/Bloc";
 
 export class BlocService{
     static async CreateNewBloc(newBloc : Bloc){
-        let res = await fetch(`https://localhost:44390/admin/CreateNewBloc`,{
+        let res = await fetch(`https://localhost:44390/api/Bloc/CreateNewBloc`,{
             method:"POST",
             body: JSON.stringify(newBloc),
             headers: {

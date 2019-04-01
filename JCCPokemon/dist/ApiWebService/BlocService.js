@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class BlocService {
     static CreateNewBloc(newBloc) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield fetch(`https://localhost:44390/admin/CreateNewBloc`, {
+            let res = yield fetch(`https://localhost:44390/api/Bloc/CreateNewBloc`, {
                 method: "POST",
                 body: JSON.stringify(newBloc),
                 headers: {
