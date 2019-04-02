@@ -7,12 +7,14 @@ import { ExtensionService } from "../../ApiWebService/ExtensionService";
 import * as CheckBox from "react-bootstrap/lib/Checkbox";
 import { Format } from "../../Model/Format";
 import { FormatService } from "../../ApiWebService/FormatService";
+import Card from "../../Model/Card";
+import CardService from "../../ApiWebService/CardService";
 
 interface CardFormularState{
     titleText: string;
     englishStyle: any;
     frenchStyle: any;
-    myLogo : any;
+    imageFile : any;
     rarities : Rarity[];
     raritiesOpts : any[];
     extensions : Extension[];
@@ -32,7 +34,7 @@ export default class CardFormular extends React.Component<any,CardFormularState>
             titleText : "Création d'une nouvelle carte",
             englishStyle : null,
             frenchStyle : null,
-            myLogo: null,
+            imageFile: null,
             rarities : [],
             raritiesOpts : [],
             extensions : [],
@@ -124,7 +126,58 @@ export default class CardFormular extends React.Component<any,CardFormularState>
             num.placeholder = "Insérez le nom du Bloc";
         }
     }
+
+    onLoadImage = () => {
+        let fileUploader = document.getElementById("imageUploader") as any;
+        
+        let file = fileUploader.files[0];
+        //this.setState({myImage : URL.createObjectURL(file)})
+        let reader = new FileReader();
+        reader.onload = (e : any) =>{
+            this.setState({imageFile: e.target.result});
+        };
+        reader.readAsDataURL(file);
+    }
     
+    sendRequest = async () => {
+        let frenchName = (document.getElementById("frenchName") as any).value;
+        let englishName = (document.getElementById("englishName") as any).value;
+        let numCard = (document.getElementById("numCard") as any).value;
+        let maxNum = (document.getElementById("maxNum") as any).value;
+        let extId = (document.getElementById("SetSelector") as any).value;
+        let rarityId = (document.getElementById("RaritySelector") as any).value;
+        let imageCard = (document.getElementById("imageUploader") as any).files[0];
+
+        if (frenchName == ""){
+            this.frenchNameOnChange();
+        }
+        if (englishName == ""){
+            this.englishNameOnChange();
+        }
+        if (numCard == ""){
+            this.numCardOnChange();
+        }
+        if (maxNum == ""){
+            this.maxOnChange();
+        }
+        if (frenchName != "" && englishName != "" && numCard != "" && maxNum != ""){
+            let card = new Card();
+            card.frenchName = frenchName;
+            card.englishName = englishName;
+            card.numCard = numCard;
+            card.maxNum = maxNum;
+            card.rarityId = rarityId;
+            card.extensionId = extId;
+
+            this.setState({titleText : "Tratement en cours ..."})
+            let result = await CardService.createNewCard(card, imageCard);
+            if (result.status == 200){
+                let json = result.json();
+                console.log(json);
+            }
+        }
+
+    }
 
     render(){
         return (
@@ -209,15 +262,15 @@ export default class CardFormular extends React.Component<any,CardFormularState>
                             </div>
                         </div>
                         <div className="col-lg-5 col-xs-12">
-                            <input type="file" id="LogoUploader" accept="image/*" /*onChange={this.onLoadLogo}*//>
-                            <img src={this.state.myLogo} height="332.598425197pt" width="238.11023622pt"/>       
+                            <input type="file" id="imageUploader" accept="image/*" onChange={this.onLoadImage}/>
+                            <img src={this.state.imageFile} height="332.598425197pt" width="238.11023622pt"/>       
                         </div>
                         <div className="col-lg-12 col-xs-12" style={{display:"flex", justifyContent:"flex-end", textAlign: "right"}}>
                                 <button 
                                     className="btn btn-primary" 
                                     style={{marginRight:'5pt', marginTop:'5pt'}} 
                                     type="button" 
-                                    //onClick={this.sendRequest}
+                                    onClick={this.sendRequest}
                                 >
                                     Créer la Carte
                                 </button>
