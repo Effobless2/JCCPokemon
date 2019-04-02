@@ -6,6 +6,7 @@ const SetFormular_1 = require("./Formulars/SetFormular");
 const PokemonFormular_1 = require("./Formulars/PokemonFormular");
 const RarityFormular_1 = require("./Formulars/RarityFormular");
 const FormatFormular_1 = require("./Formulars/FormatFormular");
+const CardFormular_1 = require("./Formulars/CardFormular");
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -58,6 +59,16 @@ class App extends React.Component {
                         React.createElement("button", { type: "button", className: "btn btn-danger", onClick: this.CloseForm }, "Annuler")))
             });
         };
+        this.AddCard = () => {
+            this.setState({ content: React.createElement("div", null,
+                    React.createElement("button", { type: "button", className: "close", onClick: this.CloseForm, "data-dismiss": "modal", "aria-label": "Close" },
+                        React.createElement("span", { "aria-hidden": "true" }, "\u00D7")),
+                    React.createElement("div", { className: "row", style: { display: "flex", alignItems: "flex-end", flexWrap: "wrap" } },
+                        React.createElement("div", { className: "col-lg-10" },
+                            React.createElement(CardFormular_1.default, null)),
+                        React.createElement("button", { type: "button", className: "btn btn-danger", onClick: this.CloseForm }, "Annuler")))
+            });
+        };
         this.state = {
             content: React.createElement("div", null, "Empty")
         };
@@ -69,6 +80,7 @@ class App extends React.Component {
             React.createElement("button", { className: "btn btn-primary", style: { "margin": "5px" }, onClick: this.AddPokemon }, "Add Pokemon"),
             React.createElement("button", { className: "btn btn-primary", style: { "margin": "5px" }, onClick: this.AddRarity }, "Add Rarity"),
             React.createElement("button", { className: "btn btn-primary", style: { "margin": "5px" }, onClick: this.AddFormat }, "Add Format"),
+            React.createElement("button", { className: "btn btn-primary", style: { "margin": "5px" }, onClick: this.AddCard }, "Add Card"),
             React.createElement("div", null, this.state.content)));
     }
 }
