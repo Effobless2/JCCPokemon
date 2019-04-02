@@ -1,4 +1,5 @@
-﻿using JCCP.SqlConnector;
+﻿using JCCP.BO;
+using JCCP.SqlConnector;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace JCCP.CardConnector
 {
     public interface ICardService
     {
-        Task<bool> CreateNewCard();
+        Task<bool> CreateNewCard(Card newCard);
     }
 
     public class CardService : ICardService
@@ -20,7 +21,7 @@ namespace JCCP.CardConnector
             _sqlService = sqlService;
         }
 
-        public async Task<bool> CreateNewCard()
+        public async Task<bool> CreateNewCard(Card newCard)
         {
             using (SqlConnection conn = await _sqlService.GetConnection())
             {
@@ -28,15 +29,14 @@ namespace JCCP.CardConnector
                 {
                     cmd.CommandText = "CreateNewCard";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@CardId", Guid.Empty);
-                    cmd.Parameters.AddWithValue("@RarityId", Guid.Empty);
-                    cmd.Parameters.AddWithValue("@TypeId", Guid.Empty);
-                    cmd.Parameters.AddWithValue("@PokemonId", Guid.Empty);
-                    cmd.Parameters.AddWithValue("@ImageUrl", "testImage");
-                    cmd.Parameters.AddWithValue("@FrenchName", "testFR");
-                    cmd.Parameters.AddWithValue("@EnglishName", "testEN");
-                    cmd.Parameters.AddWithValue("@CardNumber", "1");
-                    cmd.Parameters.AddWithValue("@MaxIndex", "105");
+                    cmd.Parameters.AddWithValue("@CardId", newCard.CardId);
+                    cmd.Parameters.AddWithValue("@RarityId", newCard.RarityId);
+                    cmd.Parameters.AddWithValue("@PokemonId", newCard.CardId);
+                    cmd.Parameters.AddWithValue("@ImageUrl", newCard.ImageUrl);
+                    cmd.Parameters.AddWithValue("@FrenchName", newCard.FrenchName);
+                    cmd.Parameters.AddWithValue("@EnglishName", newCard.EnglishName);
+                    cmd.Parameters.AddWithValue("@CardNumber", newCard.CardNumber);
+                    cmd.Parameters.AddWithValue("@MaxIndex", newCard.MaxIndex);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }

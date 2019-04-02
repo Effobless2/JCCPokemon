@@ -22,7 +22,6 @@ CREATE PROCEDURE CreateNewCard
 	-- Add the parameters for the stored procedure here
 	@CardId UNIQUEIDENTIFIER = NULL, 
 	@RarityId UNIQUEIDENTIFIER,
-	@TypeId UNIQUEIDENTIFIER,
 	@ImageUrl nvarchar(max),
 	@FrenchName nvarchar(max),
 	@EnglishName nvarchar(max),
@@ -36,7 +35,6 @@ BEGIN
 			PokemonCard(
 				CardId, 
 				RarityId, 
-				TypeId, 
 				ImageUrl, 
 				FrenchName, 
 				EnglishName, 
@@ -47,7 +45,6 @@ BEGIN
 		VALUES(
 			@CardId,
 			@RarityId,
-			@TypeId,
 			@ImageUrl,
 			@FrenchName,
 			@EnglishName,
@@ -59,7 +56,6 @@ BEGIN
 		INSERT INTO 
 			PokemonCard(
 				RarityId, 
-				TypeId, 
 				ImageUrl, 
 				FrenchName, 
 				EnglishName, 
@@ -69,7 +65,6 @@ BEGIN
 			)
 		VALUES(
 			@RarityId,
-			@TypeId,
 			@ImageUrl,
 			@FrenchName,
 			@EnglishName,
