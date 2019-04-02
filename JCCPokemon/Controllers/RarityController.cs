@@ -79,5 +79,11 @@ namespace JCCPokemon.Controllers
             }
             return uri;
         }
+
+        [HttpGet("GetAllRarities")]
+        public async Task<List<Rarity>> GetRarities()
+        {
+            return await _rarityService.GetAllRarities();
+        }
     }
 }

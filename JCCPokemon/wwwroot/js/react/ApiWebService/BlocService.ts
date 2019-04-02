@@ -23,10 +23,10 @@ export class BlocService{
         }).catch((result) => {return result;})
         if (res.status == 200){
             let json = await res.json();
-            let comments = json.map(d => {
+            let blocs = json.map(d => {
                 return d;
             }) as Bloc[];
-            return comments;
+            return blocs;
         }
     }
 }

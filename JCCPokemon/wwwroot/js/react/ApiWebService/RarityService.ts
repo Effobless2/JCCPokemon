@@ -1,6 +1,22 @@
 import { Rarity } from "../Model/Rarity";
 
 export class RarityService{
+    static async GetAllRarities() : Promise<Rarity[]> {
+        let res = await fetch("https://localhost:44390/api/Rarity/GetAllRarities",{
+            method : "GET",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        }).catch((result) => {return result;});
+        if (res.status == 200){
+            let json = await res.json();
+            let rarities = json.map(r => {
+                return r;
+            }) as Rarity[];
+            return rarities;
+        }
+    }
     static async createNewRarity(rarity : Rarity, logo : any) : Promise<any>{
         let f = new FormData();
         console.log(logo)

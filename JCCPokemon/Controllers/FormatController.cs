@@ -37,5 +37,11 @@ namespace JCCPokemon.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("GetAllFormats")]
+        public async Task<List<Format>> GetAllFormats()
+        {
+            return await _formatService.GetAllFormats();
+        }
     }
 }

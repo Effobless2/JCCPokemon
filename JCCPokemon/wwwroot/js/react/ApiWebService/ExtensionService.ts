@@ -39,4 +39,21 @@ export class ExtensionService{
             return xhr.status
         }).catch(err => {return err;});
     }
+
+    static async GetAllExtensions() : Promise<Extension[]>{
+        let res = await fetch("https://localhost:44390/api/Extension/GetAllExtensions", {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        }).catch((result) => {return result;})
+        if (res.status == 200){
+            let json = await res.json();
+            let extensions = json.map(e => {
+                return e;
+            }) as Extension[];
+            return extensions;
+        }
+    }
 }

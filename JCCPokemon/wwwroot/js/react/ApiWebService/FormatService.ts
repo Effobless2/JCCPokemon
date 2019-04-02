@@ -35,4 +35,21 @@ export class FormatService{
             return xhr.status
         }).catch(err => {return err;});
     }
+
+    static async GetAllFormats() : Promise<Format[]> {
+        let res = await fetch("https://localhost:44390/api/Format/GetAllFormats",{
+            method: "GET",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        }).catch((result) => {return result});
+        if (res.status == 200){
+            let json = await res.json();
+            let formats = json.map((format) => {
+                return format;
+            }) as Format[];
+            return formats;
+        }
+    }
 }

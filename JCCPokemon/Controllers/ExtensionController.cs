@@ -97,5 +97,11 @@ namespace JCCPokemon.Controllers
 
             return uri;
         }
+
+        [HttpGet("GetAllExtensions")]
+        public async Task<List<Extension>> GetAllExtensions()
+        {
+            return await _extensionService.GetAllExtensions();
+        }
     }
 }

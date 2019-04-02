@@ -33,10 +33,10 @@ class BlocService {
             }).catch((result) => { return result; });
             if (res.status == 200) {
                 let json = yield res.json();
-                let comments = json.map(d => {
+                let blocs = json.map(d => {
                     return d;
                 });
-                return comments;
+                return blocs;
             }
         });
     }

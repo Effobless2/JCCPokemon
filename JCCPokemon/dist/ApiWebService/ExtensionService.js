@@ -48,6 +48,24 @@ class ExtensionService {
             }).catch(err => { return err; });
         });
     }
+    static GetAllExtensions() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield fetch("https://localhost:44390/api/Extension/GetAllExtensions", {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            }).catch((result) => { return result; });
+            if (res.status == 200) {
+                let json = yield res.json();
+                let extensions = json.map(e => {
+                    return e;
+                });
+                return extensions;
+            }
+        });
+    }
 }
 exports.ExtensionService = ExtensionService;
 //# sourceMappingURL=ExtensionService.js.map
