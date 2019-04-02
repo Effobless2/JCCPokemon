@@ -37,6 +37,7 @@ namespace JCCP.CardConnector
                     cmd.Parameters.AddWithValue("@EnglishName", newCard.EnglishName);
                     cmd.Parameters.AddWithValue("@CardNumber", newCard.CardNumber);
                     cmd.Parameters.AddWithValue("@MaxIndex", newCard.MaxIndex);
+                    cmd.Parameters.AddWithValue("@ExtensionId", newCard.ExtensionId);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }

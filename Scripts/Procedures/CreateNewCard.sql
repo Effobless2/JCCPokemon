@@ -27,7 +27,8 @@ CREATE PROCEDURE CreateNewCard
 	@EnglishName nvarchar(max),
 	@PokemonId UNIQUEIDENTIFIER,
 	@CardNumber nvarchar(max),
-	@MaxIndex nvarchar(max)
+	@MaxIndex nvarchar(max),
+	@ExtensionId UNIQUEIDENTIFIER
 AS
 BEGIN
 	if @CardId is not null
@@ -40,7 +41,8 @@ BEGIN
 				EnglishName, 
 				PokemonId, 
 				CardNumber, 
-				MaxIndex
+				MaxIndex,
+				ExtensionId
 			)
 		VALUES(
 			@CardId,
@@ -50,7 +52,8 @@ BEGIN
 			@EnglishName,
 			@PokemonId,
 			@CardNumber,
-			@MaxIndex
+			@MaxIndex,
+			@ExtensionId
 		)
 	else
 		INSERT INTO 
@@ -61,7 +64,8 @@ BEGIN
 				EnglishName, 
 				PokemonId, 
 				CardNumber, 
-				MaxIndex
+				MaxIndex,
+				ExtensionId
 			)
 		VALUES(
 			@RarityId,
@@ -70,7 +74,8 @@ BEGIN
 			@EnglishName,
 			@PokemonId,
 			@CardNumber,
-			@MaxIndex
+			@MaxIndex,
+			@ExtensionId
 		)
 		
 END
